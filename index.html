@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="FENOVA Soluciones integrales. Contanos tu desafío. Diseñamos la solución: sistemas, automatización, Excel, webs, e-commerce y herramientas a medida." />
+  <meta name="theme-color" content="#07101f" />
+  <title>FENOVA | Soluciones integrales</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#07101f;--bg2:#0b1326;--panel:rgba(14,27,51,.64);--line:rgba(129,178,255,.14);
+      --text:#f6f8fc;--muted:#9aaac0;--blue:#0052ff;--cyan:#00d4ff;--shadow:0 30px 90px rgba(0,0,0,.38);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+    .noise{position:fixed;inset:0;pointer-events:none;opacity:.045;z-index:30;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+    .orb{position:absolute;border-radius:50%;filter:blur(75px);opacity:.16;pointer-events:none}.orb.a{width:430px;height:430px;background:#0052ff;top:-130px;right:2%}.orb.b{width:320px;height:320px;background:#00d4ff;top:500px;left:-170px;opacity:.09}
+    header{position:fixed;top:0;left:0;width:100%;z-index:20;transition:.3s;border-bottom:1px solid transparent}.scrolled{background:rgba(7,16,31,.78);backdrop-filter:blur(18px);border-bottom-color:var(--line)}
+    nav{height:84px;display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:12px}.logo img{width:185px;max-height:50px;object-fit:contain}
+    .navlinks{display:flex;gap:28px;align-items:center;color:#b5c0d2;font-size:14px}.navlinks a:hover{color:white}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:12px;font-weight:650;font-size:14px;border:1px solid rgba(255,255,255,.14);transition:.25s;cursor:pointer}.btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(135deg,var(--blue),#1479ff);box-shadow:0 12px 30px rgba(0,82,255,.28);border:none}.btn.ghost{background:rgba(255,255,255,.035)}
+    .hero{min-height:100svh;display:grid;align-items:center;position:relative;padding:130px 0 80px;background:radial-gradient(circle at 70% 40%,rgba(0,82,255,.10),transparent 38%),linear-gradient(180deg,#07101f 0%,#081426 100%)}
+    .hero-grid{display:grid;grid-template-columns:.88fr 1.12fr;align-items:center;gap:46px}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid rgba(0,212,255,.22);border-radius:999px;color:#b8ecff;background:rgba(0,212,255,.055);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px var(--cyan)}
+    h1{font:800 clamp(44px,6vw,76px)/.98 Montserrat,sans-serif;letter-spacing:-.045em;margin:22px 0 20px;max-width:720px}.grad{background:linear-gradient(90deg,#fff 0%,#5ba2ff 48%,#00d4ff 100%);-webkit-background-clip:text;color:transparent}
+    .lead{font-size:18px;line-height:1.65;color:#aab7ca;max-width:610px;margin:0 0 30px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.micro{margin-top:22px;color:#718097;font-size:13px}.hero-visual{position:relative;perspective:1000px}.hero-shot{width:115%;max-width:none;margin-left:-4%;filter:drop-shadow(0 35px 80px rgba(0,0,0,.42));animation:float 6s ease-in-out infinite;mask-image:linear-gradient(to bottom,#000 84%,transparent 100%)}
+    @keyframes float{50%{transform:translateY(-10px)}}
+    .float-card{position:absolute;background:rgba(8,20,42,.78);backdrop-filter:blur(16px);border:1px solid rgba(116,169,255,.22);padding:13px 15px;border-radius:14px;box-shadow:var(--shadow);font-size:12px;color:#9fb1c8;animation:float2 5s ease-in-out infinite}.float-card strong{display:block;color:white;font-size:15px;margin-top:4px}.float-card.one{top:12%;right:-3%}.float-card.two{bottom:16%;left:0;animation-delay:-2s}@keyframes float2{50%{transform:translateY(8px)}}
+    section{position:relative;padding:110px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:42px}.kicker{color:var(--cyan);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.17em}.section-head h2{font:700 clamp(32px,4vw,50px)/1.05 Montserrat,sans-serif;letter-spacing:-.035em;margin:10px 0 0;max-width:750px}.section-head p{color:var(--muted);max-width:430px;line-height:1.6;margin:0}
+    .solutions{background:#081323}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card{position:relative;min-height:255px;padding:24px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,36,69,.68),rgba(8,20,39,.72));overflow:hidden;transition:.35s}.card:hover{transform:translateY(-8px);border-color:rgba(0,212,255,.34);box-shadow:0 20px 70px rgba(0,0,0,.22)}.icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,rgba(0,82,255,.3),rgba(0,212,255,.14));border:1px solid rgba(0,212,255,.18);font-size:22px}.card h3{font:650 19px/1.2 Montserrat;margin:58px 0 9px}.card p{color:#8797ad;font-size:13px;line-height:1.55;margin:0}.card:after{content:"";position:absolute;width:130px;height:130px;border:1px solid rgba(0,82,255,.13);border-radius:50%;top:-55px;right:-55px}
+    .manifesto{overflow:hidden}.quote{font:700 clamp(36px,5vw,62px)/1.05 Montserrat;max-width:1000px;letter-spacing:-.04em;margin:0}.quote span{color:#4a5c75}.quote .active{color:white}.under{height:2px;width:150px;background:linear-gradient(90deg,var(--cyan),transparent);margin:34px 0}.smallcopy{font-size:17px;color:#98a8bd;max-width:700px;line-height:1.7}
+    .steps{background:linear-gradient(180deg,#081323 0%,#09162a 100%)}.stepgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{padding:28px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.025)}.num{color:#5d7391;font:700 13px Montserrat;letter-spacing:.15em}.step h3{font:650 22px Montserrat;margin:40px 0 12px}.step p{color:#8f9db1;line-height:1.6;margin:0}.step .line{width:44px;height:2px;background:var(--cyan);margin-top:24px}
+    .examples .mockgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.mock{border-radius:22px;border:1px solid var(--line);overflow:hidden;min-height:300px;background:linear-gradient(145deg,#0b1930,#09111f);padding:28px;position:relative}.mock h3{font:650 28px Montserrat;margin:0 0 8px}.mock p{color:#94a3b8;margin:0;max-width:470px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.tag{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:12px;color:#aac0dc}.screen{position:absolute;right:-55px;bottom:-70px;width:62%;height:260px;border-radius:22px;background:linear-gradient(135deg,#0f2446,#08101e);border:1px solid rgba(102,157,255,.24);transform:rotate(-5deg);box-shadow:var(--shadow);padding:18px}.screen .bars{height:100%;background:repeating-linear-gradient(180deg,rgba(255,255,255,.06) 0 1px,transparent 1px 34px),linear-gradient(90deg,transparent 15%,rgba(0,82,255,.26) 15% 20%,transparent 20% 36%,rgba(0,212,255,.2) 36% 41%,transparent 41%)}
+    .cta-wrap{padding:100px 0}.cta{position:relative;overflow:hidden;border:1px solid rgba(0,212,255,.18);background:linear-gradient(125deg,#0c1c38,#0a1325);border-radius:30px;padding:58px;display:flex;justify-content:space-between;align-items:center;gap:40px}.cta:after{content:"";position:absolute;width:550px;height:550px;right:-260px;top:-260px;background:radial-gradient(circle,rgba(0,82,255,.35),transparent 66%)}.cta h2{font:700 clamp(34px,4vw,52px)/1.05 Montserrat;margin:0 0 15px;letter-spacing:-.03em}.cta p{color:#9badc3;margin:0;max-width:570px;line-height:1.6}.cta .btn{z-index:2;white-space:nowrap}
+    footer{border-top:1px solid var(--line);padding:34px 0 46px;color:#718197}.foot{display:flex;align-items:center;justify-content:space-between;gap:30px}.foot img{width:160px}.foot small{font-size:12px}.socials{display:flex;gap:10px}.social{width:38px;height:38px;border:1px solid var(--line);display:grid;place-items:center;border-radius:10px;color:#9eb0c8}
+    .reveal{opacity:0;transform:translateY(24px);transition:.75s cubic-bezier(.2,.8,.2,1)}.reveal.in{opacity:1;transform:none}
+    @media(max-width:980px){.navlinks{display:none}.hero-grid{grid-template-columns:1fr}.hero{padding-top:125px}.hero-visual{margin-top:-10px}.hero-shot{width:100%;margin:0}.cards{grid-template-columns:repeat(2,1fr)}.stepgrid{grid-template-columns:1fr}.examples .mockgrid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.cta{align-items:flex-start;flex-direction:column}}
+    @media(max-width:600px){.wrap{width:min(100% - 28px,1180px)}nav{height:72px}.logo img{width:150px}.hero{padding-top:110px}.hero h1{font-size:43px}.lead{font-size:16px}.hero-visual{margin-top:20px}.float-card{display:none}section{padding:78px 0}.cards{grid-template-columns:1fr}.card{min-height:210px}.card h3{margin-top:42px}.cta{padding:34px 25px;border-radius:22px}.foot{flex-direction:column;align-items:flex-start}.mock{min-height:340px}.screen{width:75%}}
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <header id="header"><nav class="wrap"><a href="#" class="logo"><img src="assets/fenova-logo.png" alt="FENOVA Soluciones integrales"></a><div class="navlinks"><a href="#soluciones">Soluciones</a><a href="#enfoque">Enfoque</a><a href="#como">Cómo trabajamos</a><a href="#ejemplos">Qué podemos hacer</a></div><a class="btn primary wa" href="#">Hablemos</a></nav></header>
+
+  <main>
+    <section class="hero">
+      <div class="orb a"></div><div class="orb b"></div>
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="dot"></span> Soluciones integrales</div>
+          <h1>Contanos tu desafío.<br><span class="grad">Diseñamos la solución.</span></h1>
+          <p class="lead">No te vendemos una herramienta porque sí. Entendemos lo que necesitás y encontramos la mejor manera de resolverlo.</p>
+          <div class="hero-actions"><a class="btn primary wa" href="#">Contanos tu idea →</a><a class="btn ghost" href="#soluciones">Ver qué hacemos</a></div>
+          <div class="micro">Desde una planilla inteligente hasta una plataforma completa.</div>
+        </div>
+        <div class="hero-visual reveal">
+          <img class="hero-shot" src="assets/hero-soluciones.jpg" alt="Soluciones digitales, sistemas, Excel, e-commerce y automatización">
+          <div class="float-card one">Una necesidad<strong>→ una solución a medida</strong></div>
+          <div class="float-card two">Pensado para vos<strong>sin paquetes rígidos</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="solutions" id="soluciones"><div class="wrap">
+      <div class="section-head reveal"><div><div class="kicker">Qué resolvemos</div><h2>La herramienta correcta para cada problema.</h2></div><p>Podemos construirlo desde cero, mejorar lo que ya usás o combinar distintas herramientas para llegar al resultado.</p></div>
+      <div class="cards">
+        <article class="card reveal"><div class="icon">⌘</div><h3>Sistemas a medida</h3><p>Herramientas y plataformas adaptadas a tu forma de trabajar.</p></article>
+        <article class="card reveal"><div class="icon">↯</div><h3>Automatización</h3><p>Menos tareas repetitivas, menos errores y más tiempo disponible.</p></article>
+        <article class="card reveal"><div class="icon">↗</div><h3>Web & E-commerce</h3><p>Landing pages, sitios y tiendas pensados para convertir.</p></article>
+        <article class="card reveal"><div class="icon">▦</div><h3>Excel & Datos</h3><p>Planillas inteligentes, dashboards, reportes y control de gestión.</p></article>
+        <article class="card reveal"><div class="icon">◎</div><h3>Procesos</h3><p>Ordenamos problemas operativos y diseñamos una forma mejor de resolverlos.</p></article>
+      </div>
+    </div></section>
+
+    <section class="manifesto" id="enfoque"><div class="wrap reveal">
+      <div class="kicker">Nuestro enfoque</div><p class="quote"><span>Vos conocés tu negocio.</span><br><span class="active">Nosotros encontramos cómo hacerlo más simple.</span></p><div class="under"></div><p class="smallcopy">Podés llegar con una idea clara o solamente con un problema. Lo analizamos con vos, elegimos la tecnología adecuada y construimos una solución que tenga sentido para tu realidad.</p>
+    </div></section>
+
+    <section class="steps" id="como"><div class="wrap">
+      <div class="section-head reveal"><div><div class="kicker">Cómo trabajamos</div><h2>Simple. Sin vueltas.</h2></div></div>
+      <div class="stepgrid">
+        <article class="step reveal"><div class="num">01 / ENTENDEMOS</div><h3>Nos contás el problema.</h3><p>Escuchamos qué querés lograr, cómo trabajás hoy y dónde está el freno.</p><div class="line"></div></article>
+        <article class="step reveal"><div class="num">02 / DISEÑAMOS</div><h3>Encontramos la vuelta.</h3><p>Definimos la solución más simple y efectiva, sin obligarte a comprar tecnología que no necesitás.</p><div class="line"></div></article>
+        <article class="step reveal"><div class="num">03 / RESOLVEMOS</div><h3>La hacemos realidad.</h3><p>Implementamos, probamos y te acompañamos para que realmente funcione en el día a día.</p><div class="line"></div></article>
+      </div>
+    </div></section>
+
+    <section class="examples" id="ejemplos"><div class="wrap">
+      <div class="section-head reveal"><div><div class="kicker">Qué podemos hacer</div><h2>Desde algo simple hasta algo completamente a medida.</h2></div></div>
+      <div class="mockgrid">
+        <article class="mock reveal"><h3>Necesito ordenar mis ventas.</h3><p>Podemos resolverlo con una planilla inteligente, un dashboard o un sistema comercial completo. Depende de lo que realmente necesites.</p><div class="tags"><span class="tag">Excel</span><span class="tag">Dashboard</span><span class="tag">CRM</span><span class="tag">Automatización</span></div><div class="screen"><div class="bars"></div></div></article>
+        <article class="mock reveal"><h3>Necesito vender online.</h3><p>Landing, catálogo, e-commerce, formularios, pagos o un flujo personalizado.</p><div class="tags"><span class="tag">Web</span><span class="tag">E-commerce</span><span class="tag">Pagos</span></div></article>
+        <article class="mock reveal"><h3>Tengo un problema muy específico.</h3><p>Mejor. No hace falta que sepas cómo solucionarlo. Contanos qué está pasando y lo pensamos juntos.</p><div class="tags"><span class="tag">Análisis</span><span class="tag">Integración</span><span class="tag">A medida</span></div></article>
+        <article class="mock reveal"><h3>Quiero ahorrar tiempo.</h3><p>Buscamos tareas manuales y repetitivas y evaluamos qué vale la pena automatizar.</p><div class="tags"><span class="tag">Procesos</span><span class="tag">Automatización</span><span class="tag">Datos</span></div></article>
+      </div>
+    </div></section>
+
+    <section class="cta-wrap"><div class="wrap"><div class="cta reveal"><div><div class="kicker">Empecemos por el problema</div><h2>¿Qué necesitás resolver?</h2><p>No hace falta que sepas qué herramienta necesitás. Esa parte la pensamos nosotros.</p></div><a class="btn primary wa" href="#">Contanos por WhatsApp →</a></div></div></section>
+  </main>
+
+  <footer><div class="wrap foot"><img src="assets/fenova-logo.png" alt="FENOVA"><small>© <span id="year"></span> FENOVA · Soluciones integrales.</small><div class="socials"><span class="social">in</span><span class="social">◎</span></div></div></footer>
+
+<script>
+  // Cambiá este número si FENOVA usa otro WhatsApp.
+  const WA_NUMBER = '5493512267485';
+  const message = encodeURIComponent('Hola, vi FENOVA y quiero contarles un problema/proyecto para ver cómo lo podemos resolver.');
+  document.querySelectorAll('.wa').forEach(a => { a.href = `https://wa.me/${WA_NUMBER}?text=${message}`; a.target='_blank'; a.rel='noopener'; });
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const header = document.getElementById('header');
+  addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20));
+  const io = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('in')), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('.card').forEach(card=>card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`translateY(-8px) rotateX(${y*-2}deg) rotateY(${x*3}deg)`}));
+  document.querySelectorAll('.card').forEach(card=>card.addEventListener('mouseleave',()=>card.style.transform=''));
+</script>
+</body>
+</html>
