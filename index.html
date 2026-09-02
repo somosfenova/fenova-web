@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="FENOVA Soluciones integrales. Contanos tu problema y diseñamos la solución: planillas, automatización, web, e-commerce, sistemas a medida, dashboards e integraciones." />
   <meta name="theme-color" content="#07101f" />
+  <!-- FENOVA Web V10.2 -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,6 +98,88 @@
     /* V10 · Contacto desde el hero */
     .lead-modal{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:20px;background:rgba(1,6,14,.76);backdrop-filter:blur(12px)}.lead-modal.open{display:grid}.lead-dialog{width:min(520px,100%);border-radius:24px;border:1px solid rgba(101,164,255,.24);background:linear-gradient(160deg,#0d1d38,#071222);box-shadow:0 35px 120px rgba(0,0,0,.55);padding:28px;position:relative}.lead-close{position:absolute;right:16px;top:15px;width:35px;height:35px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.035);cursor:pointer;color:#9fb0c6;font-size:19px}.lead-dialog h3{font:750 25px/1.15 Montserrat;margin:0 42px 8px 0}.lead-dialog>p{color:#8fa1b8;font-size:13px;line-height:1.55;margin:0 0 21px}.lead-fields{display:grid;gap:11px}.lead-fields label{font-size:11px;font-weight:700;color:#afc1d9}.lead-fields input{width:100%;margin-top:6px;border:1px solid rgba(132,176,255,.16);outline:none;border-radius:12px;padding:13px 14px;background:rgba(3,10,22,.58);color:#eef6ff;font:500 13px Inter}.lead-fields input:focus{border-color:rgba(0,212,255,.42);box-shadow:0 0 0 3px rgba(0,212,255,.06)}.lead-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.lead-help{font-size:10px;color:#667b96;line-height:1.5;margin:12px 0 18px}.lead-dialog .btn{width:100%}@media(max-width:560px){.lead-dialog{padding:24px 19px}.lead-contact-grid{grid-template-columns:1fr}}
 
+  
+    /* V10.2 · Casos ilustrativos premium */
+    .case-stage-v102{
+      position:relative;
+      max-width:1280px;
+      margin:0 auto;
+      border:1px solid rgba(126,165,226,.18);
+      border-radius:28px;
+      overflow:hidden;
+      background:linear-gradient(180deg,rgba(7,18,35,.96),rgba(3,12,25,.98));
+      box-shadow:0 30px 100px rgba(0,0,0,.34);
+    }
+    .case-showcase-wrap{
+      position:relative;
+      width:100%;
+      aspect-ratio:16/9;
+      min-height:520px;
+      overflow:hidden;
+      background:#061225;
+    }
+    .case-showcase{
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center center;
+      transition:opacity .22s ease,transform .45s cubic-bezier(.2,.7,.2,1);
+    }
+    .case-showcase.is-changing{opacity:.12;transform:scale(.988)}
+    .case-demo-label{
+      position:absolute;
+      z-index:3;
+      top:18px;
+      right:18px;
+      display:flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(39,231,161,.3);
+      background:rgba(4,29,29,.78);
+      backdrop-filter:blur(10px);
+      color:#74f3c2;
+      font:800 10px Inter;
+      letter-spacing:.02em;
+    }
+    .case-demo-label:before{
+      content:"";
+      width:6px;height:6px;border-radius:50%;
+      background:#42e6a9;
+      box-shadow:0 0 12px rgba(66,230,169,.9);
+    }
+    .case-caption-v102{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      padding:16px 20px;
+      border-top:1px solid rgba(126,165,226,.12);
+      background:rgba(4,13,28,.88);
+    }
+    .case-caption-v102 strong{
+      color:#e9f4ff;
+      font:750 12px Inter;
+    }
+    .case-caption-v102 span{
+      color:#7790ad;
+      font:500 11px/1.5 Inter;
+      text-align:right;
+    }
+    @media(max-width:900px){
+      .case-showcase-wrap{min-height:0;aspect-ratio:16/10}
+      .case-caption-v102{align-items:flex-start;flex-direction:column;gap:5px}
+      .case-caption-v102 span{text-align:left}
+    }
+    @media(max-width:600px){
+      .case-stage-v102{border-radius:20px}
+      .case-showcase-wrap{aspect-ratio:4/3}
+      .case-showcase{object-fit:cover}
+      .case-demo-label{top:10px;right:10px}
+    }
+
   </style>
 </head>
 <body>
@@ -161,9 +244,15 @@
         <button class="case-tab" type="button" data-case="inmobiliaria"><span class="tab-icon">⌂</span>Inmobiliaria</button>
         <button class="case-tab" type="button" data-case="financiera"><span class="tab-icon">▤</span>Financiera</button>
       </div>
-      <div class="case-stage reveal">
-        <article class="case-person"><div class="case-portrait"><span class="portrait-fallback" id="portraitFallback">LG</span><img id="casePortrait" src="https://thispersonnotexist.org/static/badge/F_seed41470.webp" alt="Retrato sintético ilustrativo" referrerpolicy="no-referrer" onerror="this.style.display='none'"></div><div class="case-person-copy"><h3 id="caseBusiness">Bruma Store</h3><div class="case-meta" id="caseMeta">Tienda de indumentaria · Córdoba</div><div class="case-solution-kind" id="caseKind">E-commerce + stock + ventas</div><blockquote class="case-quote" id="caseQuote">“Vendía por Instagram, WhatsApp y local, pero el stock nunca coincidía. Ahora tengo tienda online, ventas y reposición en un solo lugar.”</blockquote><span class="case-solution-tag" id="caseTag">Una solución para comercio con FENOVA</span></div></article>
-        <article class="case-system"><div class="case-browser"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-url" id="caseUrl">tienda + operación · ejemplo</span><span class="live-pill">● Demo</span></div><div class="solution-canvas" id="solutionCanvas"></div></article>
+      <div class="case-stage-v102 reveal">
+        <div class="case-showcase-wrap">
+          <span class="case-demo-label">Demo ilustrativa</span>
+          <img class="case-showcase" id="caseShowcase" src="assets/caso-comercio.webp" alt="Ejemplo ilustrativo de solución para comercio desarrollada por FENOVA">
+        </div>
+        <div class="case-caption-v102">
+          <strong id="caseCaptionTitle">E-commerce + stock + ventas</strong>
+          <span id="caseCaptionText">Una muestra visual de cómo podría verse una solución terminada para este tipo de negocio.</span>
+        </div>
       </div>
       <p class="illustrative-note reveal"><strong>Ejemplos ilustrativos:</strong> los negocios, nombres, personas, cifras y citas representan casos de uso y no clientes identificados.</p>
       <div class="industry-note reveal"><strong>¿Tu rubro no aparece?</strong> No importa. Diseñamos soluciones alrededor de procesos, no de plantillas.</div>
@@ -294,42 +383,66 @@
     });
   }
 
-
   const caseData = {
-    comercio:{business:'Bruma Store',meta:'Tienda de indumentaria · Córdoba',person:'Lucía',initials:'LG',kind:'E-commerce + stock + ventas',portrait:'https://thispersonnotexist.org/static/badge/F_seed41470.webp',quote:'“Vendía por Instagram, WhatsApp y local, pero el stock nunca coincidía. Ahora tengo tienda online, ventas y reposición en un solo lugar.”',tag:'Una solución para comercio con FENOVA',url:'e-commerce + operación · ejemplo'},
-    gastronomia:{business:'Patio 27',meta:'Café & cocina · Córdoba',person:'Tomás',initials:'TR',kind:'Sistema operativo de pedidos',portrait:'https://thispersonnotexist.org/static/badge/M_seed38871.webp',quote:'“Los pedidos entraban por varios lados y cerrar la caja era un lío. Ahora veo salón, cocina, delivery y caja desde el mismo lugar.”',tag:'Una solución para gastronomía con FENOVA',url:'operación gastronómica · ejemplo'},
-    consultorio:{business:'Consultorio Norte',meta:'Salud & profesionales · Córdoba',person:'Valentina',initials:'VS',kind:'CRM + agenda + pacientes',portrait:'https://thispersonnotexist.org/static/badge/F_seed49125.webp',quote:'“Los turnos, pacientes, pagos y recordatorios estaban repartidos. Ahora la agenda y el seguimiento se manejan desde un solo lugar.”',tag:'Una solución para consultorios con FENOVA',url:'CRM + agenda · ejemplo'},
-    constructora:{business:'Horizonte Obras',meta:'Constructora · Córdoba',person:'Sergio',initials:'SP',kind:'Dashboard de obras y costos',portrait:'https://thispersonnotexist.org/static/badge/M_seed21754.webp',quote:'“Cada obra era un Excel distinto y consolidar costos me llevaba horas. Ahora puedo seguir avance, gastos y proveedores por obra.”',tag:'Una solución para constructoras con FENOVA',url:'dashboard de obra · ejemplo'},
-    inmobiliaria:{business:'Urbana Propiedades',meta:'Inmobiliaria · Córdoba',person:'Marina',initials:'ML',kind:'CRM comercial + propiedades',portrait:'https://thispersonnotexist.org/static/badge/F_seed17193.webp',quote:'“Las consultas llegaban por WhatsApp y después era difícil hacer seguimiento. Ahora cada interesado tiene estado, próxima acción y propiedad asociada.”',tag:'Una solución para inmobiliarias con FENOVA',url:'CRM inmobiliario · ejemplo'},
-    financiera:{business:'Punto Capital',meta:'Servicios financieros · Córdoba',person:'Nicolás',initials:'NF',kind:'Cotizador + operaciones + validación',portrait:'https://thispersonnotexist.org/static/badge/M_seed29793.webp',quote:'“Las cotizaciones, clientes y operaciones requerían demasiado control manual. Ahora tengo cálculo, seguimiento y validación en un solo flujo.”',tag:'Una solución para financieras con FENOVA',url:'herramienta financiera · ejemplo'}
-  };
-
-  const solutionTemplates={
-    comercio:(c)=>`<div class="mock-shop"><div class="shop-top"><div class="shop-brand">${c.business}</div><div class="shop-search">Buscar producto, pedido o cliente...</div><div class="shop-cart">Carrito · 2</div></div><div class="shop-body"><div><div class="shop-hero"><div><h4>Nueva colección</h4><p>Tienda online conectada con tu stock real.</p></div><div class="shop-kpi">$286.400<small style="display:block;font:600 8px Inter;color:#d4e9ff">ventas hoy</small></div></div><div class="product-grid"><div class="product-card"><div class="product-img"></div><div class="product-name">Remera Essential</div><div class="product-price">$28.900</div><div class="product-stock">18 en stock</div></div><div class="product-card"><div class="product-img"></div><div class="product-name">Jean Recto 42</div><div class="product-price">$54.500</div><div class="product-stock">7 en stock</div></div><div class="product-card"><div class="product-img"></div><div class="product-name">Campera Urban</div><div class="product-price">$89.900</div><div class="product-stock">3 por reponer</div></div></div></div><div><div class="order-panel"><h5>Pedidos recientes</h5><div class="order-item"><b>#2481 · Web</b><span class="order-status">Pagado</span></div><div class="order-item"><b>#2480 · Local</b><span>Retiro</span></div><div class="order-item"><b>#2479 · Instagram</b><span>Preparando</span></div></div><div class="shop-summary"><small>Productos por reponer</small><strong>6</strong><small>Stock sincronizado con ventas online y local.</small></div></div></div></div>`,
-    gastronomia:(c)=>`<div class="mock-food"><div class="food-head"><h4>${c.business} · Operación</h4><span class="food-status">● Cocina conectada</span></div><div class="food-stats"><div class="food-stat"><span>Pedidos activos</span><b>11</b></div><div class="food-stat"><span>Mesas ocupadas</span><b>8 / 14</b></div><div class="food-stat"><span>Delivery</span><b>7</b></div><div class="food-stat"><span>Caja hoy</span><b>$418k</b></div></div><div class="kds"><div class="kds-col"><h5>NUEVOS · 3</h5><div class="ticket"><div class="ticket-top"><span>Mesa 08</span><span class="ticket-time">02:14</span></div><div class="ticket-items">2 × Café doble<br>1 × Tostado completo</div><span class="ticket-chip">Salón</span></div><div class="ticket"><div class="ticket-top"><span>Delivery #1094</span><span class="ticket-time">01:32</span></div><div class="ticket-items">1 × Bowl veggie<br>2 × Limonada</div><span class="ticket-chip">Delivery</span></div></div><div class="kds-col"><h5>PREPARANDO · 4</h5><div class="ticket"><div class="ticket-top"><span>Mesa 03</span><span class="ticket-time">08:45</span></div><div class="ticket-items">2 × Hamburguesa<br>1 × Papas</div><span class="ticket-chip">Cocina</span></div><div class="ticket"><div class="ticket-top"><span>Take away #317</span><span class="ticket-time">05:18</span></div><div class="ticket-items">1 × Ensalada<br>1 × Agua</div><span class="ticket-chip">Retiro</span></div></div><div class="kds-col"><h5>LISTOS · 2</h5><div class="ticket"><div class="ticket-top"><span>Mesa 11</span><span>✓</span></div><div class="ticket-items">Pedido listo para entregar</div><span class="ticket-chip">Listo</span></div></div></div><div class="food-bottom"><div class="table-map"><h5>Mapa de mesas</h5><div class="table-dots"><span class="table-dot busy">01</span><span class="table-dot">02</span><span class="table-dot busy">03</span><span class="table-dot busy">04</span><span class="table-dot">05</span><span class="table-dot busy">06</span></div></div><div class="food-cash"><h5>Caja en vivo</h5><b>$418.900</b></div></div></div>`,
-    consultorio:(c)=>`<div class="mock-clinic"><aside class="clinic-side"><div class="clinic-logo">Consultorio Norte</div><div class="clinic-nav"><span>Agenda</span><span>Pacientes</span><span>Seguimientos</span><span>Pagos</span><span>Documentos</span></div></aside><div class="clinic-main"><div class="clinic-head"><h4>Hola, ${c.person} 👋</h4><span class="clinic-date">Miércoles · 2 Sep</span></div><div class="clinic-grid"><div class="agenda"><h5>Agenda de hoy</h5><div class="appt"><b class="appt-time">09:30</b><span>Paciente 018 · Control</span><span class="appt-status">Confirmado</span></div><div class="appt"><b class="appt-time">11:00</b><span>Paciente 144 · Primera consulta</span><span class="appt-status">En espera</span></div><div class="appt"><b class="appt-time">14:30</b><span>Paciente 092 · Seguimiento</span><span class="appt-status">Confirmado</span></div><div class="appt"><b class="appt-time">16:00</b><span>Paciente 223 · Control</span><span class="appt-status">Confirmar</span></div></div><div class="patient-card"><div class="patient-avatar"></div><h5>Próximo paciente</h5><div class="patient-name">Paciente 018</div><div class="patient-meta">Último control hace 30 días</div><div class="patient-actions"><span>Historia clínica</span><span>Pagos y comprobantes</span><span>Enviar recordatorio</span></div></div><div class="clinic-pipeline"><h5>Seguimientos</h5><div class="pipeline-row"><div class="pipe"><small>Turnos hoy</small><b>12</b></div><div class="pipe"><small>Confirmados</small><b>10</b></div><div class="pipe"><small>Recordatorios</small><b>4</b></div><div class="pipe"><small>Pacientes</small><b>368</b></div></div></div></div></div></div>`,
-    constructora:(c)=>`<div class="mock-build"><aside class="build-side"><div class="build-brand">Horizonte Obras</div><span>Resumen</span><span>Obras</span><span>Presupuestos</span><span>Proveedores</span><span>Gastos</span><span>Certificados</span></aside><div class="build-main"><div class="build-head"><h4>Control de obras</h4><span class="build-chip">5 obras activas</span></div><div class="build-kpis"><div class="build-kpi"><span>Presupuesto activo</span><b>$184M</b></div><div class="build-kpi"><span>Pagos semana</span><b>$9,4M</b></div><div class="build-kpi"><span>Proveedores</span><b>31</b></div></div><div class="build-content"><div class="projects-box"><h5>Avance por obra</h5><div class="project-row"><div class="project-top"><span>Edificio Centro</span><b>82%</b></div><div class="progress"><i style="width:82%"></i></div></div><div class="project-row"><div class="project-top"><span>Casa Norte</span><b>64%</b></div><div class="progress"><i style="width:64%"></i></div></div><div class="project-row"><div class="project-top"><span>Local Nueva Córdoba</span><b>31%</b></div><div class="progress"><i style="width:31%"></i></div></div><div class="project-row"><div class="project-top"><span>Complejo Sur</span><b>55%</b></div><div class="progress"><i style="width:55%"></i></div></div></div><div class="cost-box"><h5>Costos ejecutados</h5><div class="cost-donut"></div><div class="cost-list">Materiales · $48,2M<br>Mano de obra · $27,4M<br>Servicios · $8,7M<br><b>Desvío proyectado · +2,4%</b></div></div></div></div></div>`,
-    inmobiliaria:(c)=>`<div class="mock-realty"><div class="realty-head"><h4>Pipeline comercial · ${c.business}</h4><div class="realty-actions"><span>+ Propiedad</span><span>+ Consulta</span></div></div><div class="realty-stats"><div class="realty-stat"><small>Propiedades</small><b>86</b></div><div class="realty-stat"><small>Consultas nuevas</small><b>23</b></div><div class="realty-stat"><small>Visitas</small><b>9</b></div><div class="realty-stat"><small>Reservas</small><b>3</b></div></div><div class="kanban"><div class="kan-col"><div class="kan-title"><span>CONSULTA</span><span>8</span></div><div class="lead-card"><div class="property-img"></div><div class="lead-name">Carolina M.</div><div class="lead-prop">Depto · Nueva Córdoba</div><div class="lead-next">Responder WhatsApp →</div></div><div class="lead-card"><div class="lead-name">Diego R.</div><div class="lead-prop">Casa · Villa Allende</div><div class="lead-next">Calificar interés →</div></div></div><div class="kan-col"><div class="kan-title"><span>VISITA</span><span>5</span></div><div class="lead-card"><div class="property-img"></div><div class="lead-name">Martina S.</div><div class="lead-prop">Local · Centro</div><div class="lead-next">Hoy · 17:30</div></div></div><div class="kan-col"><div class="kan-title"><span>NEGOCIACIÓN</span><span>3</span></div><div class="lead-card"><div class="lead-name">Federico A.</div><div class="lead-prop">Depto · General Paz</div><div class="lead-next">Esperando propuesta</div></div></div><div class="kan-col"><div class="kan-title"><span>RESERVA</span><span>2</span></div><div class="lead-card"><div class="lead-name">Paula C.</div><div class="lead-prop">Casa · Mendiolaza</div><div class="lead-next">Documentación completa</div></div></div></div></div>`,
-    financiera:(c)=>`<div class="mock-finance"><div class="fin-head"><h4>Punto Capital · Mesa operativa</h4><span class="fin-live">● Cotizaciones actualizadas</span></div><div class="quote-strip"><div class="quote-box"><small>USDT → ARS</small><b class="quote-up">$1.571</b></div><div class="quote-box"><small>ARS → USDT</small><b>$1.604</b></div><div class="quote-box"><small>USD cash</small><b>$1.525</b></div><div class="quote-box"><small>PIX</small><b>5,20</b></div></div><div class="fin-grid"><div class="calc-card"><h5>Calcular operación</h5><div class="fake-input">Tengo<b>105,00 USDT</b></div><div class="fake-input">Quiero recibir<b>Pesos transferencia</b></div><div class="calc-result"><small>Resultado estimado</small><strong>$164.955</strong></div></div><div class="ops-card"><h5>Operaciones recientes</h5><div class="op-row"><b>OP-2841</b><span>USDT → ARS</span><span>$2,4M</span><span class="op-state">Validada</span></div><div class="op-row"><b>OP-2840</b><span>ARS → USDT</span><span>$890k</span><span class="op-state pending">Pendiente</span></div><div class="op-row"><b>OP-2839</b><span>USD → ARS</span><span>$1,2M</span><span class="op-state">Liquidada</span></div><div class="op-row"><b>OP-2838</b><span>USDT → PIX</span><span>3.450 USDT</span><span class="op-state">Validada</span></div></div></div><div class="fin-bottom"><div class="fin-mini"><small>Operaciones hoy</small><b>34</b></div><div class="fin-mini"><small>Pendientes</small><b>6</b></div><div class="fin-mini"><small>Clientes activos</small><b>214</b></div></div></div>`
+    comercio:{
+      image:'assets/caso-comercio.webp',
+      kind:'E-commerce + stock + ventas',
+      alt:'Ejemplo ilustrativo de e-commerce, stock y ventas para una tienda de indumentaria'
+    },
+    gastronomia:{
+      image:'assets/caso-gastronomia.webp',
+      kind:'Sistema operativo de pedidos',
+      alt:'Ejemplo ilustrativo de sistema operativo para restaurante, salón, cocina, delivery y caja'
+    },
+    consultorio:{
+      image:'assets/caso-consultorio.webp',
+      kind:'CRM + agenda + pacientes',
+      alt:'Ejemplo ilustrativo de CRM, agenda y gestión de pacientes para consultorio'
+    },
+    constructora:{
+      image:'assets/caso-constructora.webp',
+      kind:'Dashboard de obras y costos',
+      alt:'Ejemplo ilustrativo de dashboard de obras, costos, presupuestos y proveedores'
+    },
+    inmobiliaria:{
+      image:'assets/caso-inmobiliaria.webp',
+      kind:'CRM comercial + propiedades',
+      alt:'Ejemplo ilustrativo de CRM inmobiliario con propiedades, consultas, visitas y oportunidades'
+    },
+    financiera:{
+      image:'assets/caso-financiera.webp',
+      kind:'Cotizador + operaciones',
+      alt:'Ejemplo ilustrativo de herramienta financiera para cotizaciones, cálculos y operaciones'
+    }
   };
 
   const renderCase=(key)=>{
-    const c=caseData[key]; if(!c) return;
-    const portrait=document.getElementById('casePortrait');
-    portrait.style.display='block'; portrait.src=c.portrait;
-    document.getElementById('portraitFallback').textContent=c.initials;
-    document.getElementById('caseBusiness').textContent=c.business;
-    document.getElementById('caseMeta').textContent=c.meta;
-    document.getElementById('caseKind').textContent=c.kind;
-    document.getElementById('caseQuote').textContent=c.quote;
-    document.getElementById('caseTag').textContent=c.tag;
-    document.getElementById('caseUrl').textContent=c.url;
-    document.getElementById('solutionCanvas').innerHTML=solutionTemplates[key](c);
+    const c=caseData[key];
+    const img=document.getElementById('caseShowcase');
+    if(!c || !img) return;
+    img.classList.add('is-changing');
+    const preload=new Image();
+    preload.onload=()=>{
+      img.src=c.image;
+      img.alt=c.alt;
+      document.getElementById('caseCaptionTitle').textContent=c.kind;
+      requestAnimationFrame(()=>img.classList.remove('is-changing'));
+    };
+    preload.src=c.image;
   };
-  const caseTabs=document.getElementById('caseTabs');
-  if(caseTabs){caseTabs.addEventListener('click',e=>{const btn=e.target.closest('.case-tab');if(!btn)return;caseTabs.querySelectorAll('.case-tab').forEach(x=>x.classList.toggle('active',x===btn));renderCase(btn.dataset.case)});renderCase('comercio');}
 
-  const carousel = document.getElementById('projectCarousel');
+  const caseTabs=document.getElementById('caseTabs');
+  if(caseTabs){
+    caseTabs.addEventListener('click',e=>{
+      const btn=e.target.closest('.case-tab');
+      if(!btn)return;
+      caseTabs.querySelectorAll('.case-tab').forEach(x=>x.classList.toggle('active',x===btn));
+      renderCase(btn.dataset.case);
+    });
+    renderCase('comercio');
+  }
+
+const carousel = document.getElementById('projectCarousel');
   if(carousel){
     const slides=[...carousel.querySelectorAll('.slide')];
     const dots=[...carousel.querySelectorAll('.carousel-dot')];
