@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="FENOVA Soluciones integrales. Contanos tu problema y diseñamos la solución: planillas, automatización, web, e-commerce, sistemas a medida, dashboards e integraciones." />
   <meta name="theme-color" content="#07101f" />
-  <!-- FENOVA Web V10.3 · WhatsApp activo -->
+  <!-- FENOVA Web V10.3.1 · Fix JavaScript WhatsApp -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -391,8 +391,7 @@
     if(email) parts.push(`Email: ${email}`);
     parts.push('', '¿Podemos verlo juntos?');
 
-    const message=parts.join('
-');
+    const message=parts.join('\n');
     const url='https://wa.me/5493517737837?text='+encodeURIComponent(message);
 
     closeLead();
