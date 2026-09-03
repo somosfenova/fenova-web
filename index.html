@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="FENOVA Soluciones integrales. Contanos tu problema y diseñamos la solución: planillas, automatización, web, e-commerce, sistemas a medida, dashboards e integraciones." />
   <meta name="theme-color" content="#07101f" />
-  <!-- FENOVA Web V10.3.1 · Fix JavaScript WhatsApp -->
+  <!-- FENOVA Web V10.3.2 · Hero reconstruido + WhatsApp -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -223,36 +223,125 @@
     <a class="btn primary nav-cta" href="#contanos">Contanos tu problema</a>
   </nav></header>
   <main>
-    <section class="hero" id="inicio"><div class="orb a"></div><div class="orb b"></div><div class="wrap hero-grid">
-      <div class="reveal"><div class="eyebrow"><span class="dot"></span> FENOVA · Soluciones integrales</div><h1>Contanos tu problema.<br><span class="grad">Diseñamos la solución.</span></h1><p class="lead">No necesitás saber si hace falta una web, una planilla, una automatización o un sistema. Entendemos qué querés resolver y buscamos la forma más simple y efectiva de hacerlo.</p>
-        <div class="solution-rotator" aria-label="Soluciones que podemos desarrollar"><span class="prefix">Podemos crear</span><span class="rotating-wrap" aria-live="polite"><span class="rotating-word" id="rotatingSolution">una landing.</span></span></div>
-        <div class="problem-box" id="contanos"><label for="problemInput">¿Qué necesitás resolver?</label><textarea id="problemInput" placeholder="Ej.: Tengo los pedidos en WhatsApp, el stock en Excel y pierdo mucho tiempo controlando todo..."></textarea><div class="problem-actions"><button class="btn primary" id="problemButton" type="button">Contarnos mi problema →</button><small>No hace falta que sepas qué herramienta necesitás. Esa parte es nuestra.</small></div><div class="problem-status" id="problemStatus">Se abrió WhatsApp con tu consulta preparada. Enviá el mensaje y nos llega directamente a FENOVA.</div></div>
-        <div class="lead-modal" id="leadModal" aria-hidden="true">
-          <div class="lead-dialog" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
-            <button class="lead-close" id="leadClose" type="button" aria-label="Cerrar">×</button>
-            <h3 id="leadTitle">Ya tenemos tu problema.</h3>
-            <p>Sumá tu nombre y, si querés, algunos datos de tu negocio. Después abrimos directamente el WhatsApp de FENOVA con toda la consulta preparada.</p>
-            <div class="lead-fields">
-              <label>Nombre
-                <input id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" required>
-              </label>
-              <div class="lead-contact-grid">
-                <label>Empresa / negocio <span style="font-weight:500;color:#657b97">(opcional)</span>
-                  <input id="leadCompany" type="text" autocomplete="organization" placeholder="Ej.: Mi comercio">
-                </label>
-                <label>Email <span style="font-weight:500;color:#657b97">(opcional)</span>
-                  <input id="leadEmail" type="email" autocomplete="email" placeholder="tu@email.com">
-                </label>
-              </div>
+    <section class="hero" id="inicio">
+      <div class="orb a"></div>
+      <div class="orb b"></div>
+
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">
+            <span class="dot"></span>
+            FENOVA · Soluciones integrales
+          </div>
+
+          <h1>
+            Contanos tu problema.<br>
+            <span class="grad">Diseñamos la solución.</span>
+          </h1>
+
+          <p class="lead">
+            No necesitás saber si hace falta una web, una planilla, una automatización o un sistema.
+            Entendemos qué querés resolver y buscamos la forma más simple y efectiva de hacerlo.
+          </p>
+
+          <div class="solution-rotator" aria-label="Soluciones que podemos desarrollar">
+            <span class="prefix">Podemos crear</span>
+            <span class="rotating-wrap" aria-live="polite">
+              <span class="rotating-word" id="rotatingSolution">una landing.</span>
+            </span>
+          </div>
+
+          <div class="problem-box" id="contanos">
+            <label for="problemInput">¿Qué necesitás resolver?</label>
+            <textarea
+              id="problemInput"
+              placeholder="Ej.: Tengo los pedidos en WhatsApp, el stock en Excel y pierdo mucho tiempo controlando todo..."
+            ></textarea>
+
+            <div class="problem-actions">
+              <button class="btn primary" id="problemButton" type="button">
+                Contarnos mi problema →
+              </button>
+              <small>
+                No hace falta que sepas qué herramienta necesitás. Esa parte es nuestra.
+              </small>
             </div>
-            <div class="lead-help">Cuando envíes el mensaje por WhatsApp, también vamos a recibir automáticamente el número desde el que nos escribís. No necesitás volver a cargarlo acá.</div>
-            <button class="btn primary" id="leadSend" type="button">Enviar por WhatsApp →</button>
+
+            <div class="problem-status" id="problemStatus">
+              Se abrió WhatsApp con tu consulta preparada. Enviá el mensaje y nos llega directamente a FENOVA.
+            </div>
           </div>
         </div>
-<div class="lead-help">Necesitamos al menos tu nombre y un WhatsApp para poder volver a contactarte. Al continuar, abrimos el chat de @somosfenova y copiamos toda la consulta.</div><button class="btn primary" id="leadSend" type="button">Continuar por Instagram →</button></div></div>
+
+        <div class="hero-visual reveal">
+          <img
+            class="hero-shot"
+            src="assets/hero-soluciones.jpg"
+            alt="Soluciones digitales, sistemas, Excel, e-commerce y automatización"
+          >
+          <div class="float-card one">
+            Primero el problema
+            <strong>después la herramienta</strong>
+          </div>
+          <div class="float-card two">
+            Una necesidad
+            <strong>→ una solución con sentido</strong>
+          </div>
+        </div>
       </div>
-      <div class="hero-visual reveal"><img class="hero-shot" src="assets/hero-soluciones.jpg" alt="Soluciones digitales, sistemas, Excel, e-commerce y automatización"><div class="float-card one">Primero el problema<strong>después la herramienta</strong></div><div class="float-card two">Una necesidad<strong>→ una solución con sentido</strong></div></div>
-    </div></section>
+
+      <div class="lead-modal" id="leadModal" aria-hidden="true">
+        <div class="lead-dialog" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+          <button class="lead-close" id="leadClose" type="button" aria-label="Cerrar">×</button>
+
+          <h3 id="leadTitle">Ya tenemos tu problema.</h3>
+          <p>
+            Sumá tu nombre y, si querés, algunos datos de tu negocio.
+            Después abrimos directamente el WhatsApp de FENOVA con toda la consulta preparada.
+          </p>
+
+          <div class="lead-fields">
+            <label>
+              Nombre
+              <input id="leadName" type="text" autocomplete="name" placeholder="Tu nombre" required>
+            </label>
+
+            <div class="lead-contact-grid">
+              <label>
+                Empresa / negocio
+                <span style="font-weight:500;color:#657b97">(opcional)</span>
+                <input
+                  id="leadCompany"
+                  type="text"
+                  autocomplete="organization"
+                  placeholder="Ej.: Mi comercio"
+                >
+              </label>
+
+              <label>
+                Email
+                <span style="font-weight:500;color:#657b97">(opcional)</span>
+                <input
+                  id="leadEmail"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="tu@email.com"
+                >
+              </label>
+            </div>
+          </div>
+
+          <div class="lead-help">
+            Cuando envíes el mensaje por WhatsApp, también vamos a recibir automáticamente
+            el número desde el que nos escribís. No necesitás volver a cargarlo acá.
+          </div>
+
+          <button class="btn primary" id="leadSend" type="button">
+            Enviar por WhatsApp →
+          </button>
+        </div>
+      </div>
+    </section>
 
     <section class="pain-section" id="problemas"><div class="wrap"><div class="section-head reveal"><div><div class="kicker">Problemas que resolvemos</div><h2>¿Te pasa algo de esto?</h2></div><p>No hablamos primero de tecnología. Hablamos de las cosas que hoy te hacen perder tiempo, control o oportunidades.</p></div><div class="pain-grid">
       <article class="pain-card reveal"><div class="pain-icon">▦</div><h3>La planilla se te fue de las manos</h3><p>Empezó siendo práctica. Ahora tiene pestañas, fórmulas y datos que sólo una persona entiende.</p><strong>Podemos ordenarla, automatizarla o reemplazarla.</strong></article>
