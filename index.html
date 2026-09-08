@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="FENOVA Soluciones integrales. Contanos tu problema y diseñamos la solución: planillas, automatización, web, e-commerce, sistemas a medida, dashboards e integraciones." />
   <meta name="theme-color" content="#07101f" />
-  <!-- FENOVA Web V10.5 · Backend audio + panel de consultas -->
+  <!-- FENOVA Web V10.7 · Audio directo a Supabase + branding corregido -->
   <title>FENOVA | Soluciones integrales</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/png" href="assets/fenova-isotipo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
@@ -454,12 +454,31 @@
       display:inline-flex;margin-top:9px;font-size:10px;color:#6d839f
     }
 
+  
+    /* V10.7 · Branding FENOVA con isotipo oficial */
+    .fenova-lockup{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .fenova-lockup .fenova-symbol{width:54px;height:54px;object-fit:contain;display:block}
+    .fenova-lockup .fenova-word{font:800 28px/1 Montserrat,sans-serif;letter-spacing:.09em;color:#fff}
+    .fenova-lockup .fenova-sub{display:block;margin-top:4px;font:700 6.5px/1 Inter,sans-serif;letter-spacing:.26em;color:#30d9f8}
+    .foot-brand .fenova-lockup{margin-bottom:14px}
+    .foot-brand .fenova-lockup .fenova-symbol{width:48px;height:48px}
+    .foot-brand .fenova-lockup .fenova-word{font-size:25px}
+    @media(max-width:650px){
+      .fenova-lockup{gap:7px}
+      .fenova-lockup .fenova-symbol{width:43px;height:43px}
+      .fenova-lockup .fenova-word{font-size:22px}
+      .fenova-lockup .fenova-sub{font-size:5px;letter-spacing:.21em}
+    }
+
   </style>
 </head>
 <body>
   <div class="noise"></div>
   <header id="header"><nav class="wrap">
-    <a href="#inicio" class="logo"><img src="assets/fenova-logo.png" alt="FENOVA Soluciones integrales"></a>
+    <a href="#inicio" class="logo fenova-lockup" aria-label="FENOVA Soluciones integrales">
+      <img class="fenova-symbol" src="assets/fenova-isotipo.png" alt="">
+      <span><span class="fenova-word">FENOVA</span><span class="fenova-sub">SOLUCIONES INTEGRALES</span></span>
+    </a>
     <div class="navlinks"><a href="#problemas">Qué resolvemos</a><a href="#soluciones">Soluciones</a><a href="#proyectos">Casos reales</a><a href="#como">Cómo trabajamos</a><a href="#precios">Precios</a></div>
     <a class="btn primary nav-cta" href="#contanos">Hablemos</a>
   </nav></header>
@@ -602,7 +621,7 @@
         <div class="lead-dialog" role="dialog" aria-modal="true" aria-labelledby="audioLeadTitle">
           <button class="lead-close" id="audioLeadClose" type="button" aria-label="Cerrar">×</button>
           <h3 id="audioLeadTitle">¿Cómo te contactamos?</h3>
-          <p>Tu audio ya está listo. Dejanos estos datos y la consulta entra directamente al panel de FENOVA.</p>
+          <p>Tu audio ya está listo. Dejanos estos datos y a la brevedad nos comunicaremos con vos.</p>
 
           <div class="lead-fields">
             <div class="lead-contact-grid">
@@ -775,7 +794,10 @@
     </svg>
   </a>
 
-  <footer><div class="wrap foot"><div class="foot-brand"><img src="assets/fenova-logo.png" alt="FENOVA"><p>Soluciones integrales para personas, emprendimientos, negocios y empresas. Tecnología pensada alrededor de lo que realmente necesitás.</p></div><small>© <span id="year"></span> FENOVA · Soluciones integrales.</small><div class="socials" aria-label="Redes sociales"><a class="social instagram" href="https://www.instagram.com/somosfenova/" target="_blank" rel="noopener" aria-label="Instagram FENOVA" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><button class="social" data-disabled="true" aria-label="YouTube próximamente" title="YouTube próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12s0-4-1-5-4-1-8-1-7 0-8 1-1 5-1 5 0 4 1 5 4 1 8 1 7 0 8-1 1-5 1-5Z"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg></button><a class="social whatsapp" href="https://wa.me/5493517737837?text=Hola%20FENOVA%2C%20vi%20su%20web%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" aria-label="WhatsApp FENOVA" title="WhatsApp FENOVA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.5c.3 2.4 2.2 4.4 4.6 5"/></svg></a><button class="social" data-disabled="true" aria-label="LinkedIn próximamente" title="LinkedIn próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="4" height="11"/><rect x="10" y="9" width="4" height="11"/><path d="M14 14c0-3 6-4 6 1v5h-4v-5c0-2-2-2-2 0"/><circle cx="6" cy="5.5" r="2"/></svg></button></div></div></footer>
+  <footer><div class="wrap foot"><div class="foot-brand"><div class="fenova-lockup" aria-label="FENOVA Soluciones integrales">
+      <img class="fenova-symbol" src="assets/fenova-isotipo.png" alt="">
+      <span><span class="fenova-word">FENOVA</span><span class="fenova-sub">SOLUCIONES INTEGRALES</span></span>
+    </div><p>Soluciones integrales para personas, emprendimientos, negocios y empresas. Tecnología pensada alrededor de lo que realmente necesitás.</p></div><small>© <span id="year"></span> FENOVA · Soluciones integrales.</small><div class="socials" aria-label="Redes sociales"><a class="social instagram" href="https://www.instagram.com/somosfenova/" target="_blank" rel="noopener" aria-label="Instagram FENOVA" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><button class="social" data-disabled="true" aria-label="YouTube próximamente" title="YouTube próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12s0-4-1-5-4-1-8-1-7 0-8 1-1 5-1 5 0 4 1 5 4 1 8 1 7 0 8-1 1-5 1-5Z"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg></button><a class="social whatsapp" href="https://wa.me/5493517737837?text=Hola%20FENOVA%2C%20vi%20su%20web%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" aria-label="WhatsApp FENOVA" title="WhatsApp FENOVA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.5c.3 2.4 2.2 4.4 4.6 5"/></svg></a><button class="social" data-disabled="true" aria-label="LinkedIn próximamente" title="LinkedIn próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="4" height="11"/><rect x="10" y="9" width="4" height="11"/><path d="M14 14c0-3 6-4 6 1v5h-4v-5c0-2-2-2-2 0"/><circle cx="6" cy="5.5" r="2"/></svg></button></div></div></footer>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
   const header = document.getElementById('header');
@@ -846,10 +868,11 @@
     });
   }));
 
-  // Grabación de audio + envío privado al backend FENOVA
+  // V10.7 · Grabación robusta + subida directa a Supabase con URL firmada
   let mediaRecorder=null;
   let audioChunks=[];
   let recordedBlob=null;
+  let recordedMime='';
   let timerInterval=null;
   let recordingStartedAt=0;
   let audioStream=null;
@@ -870,6 +893,12 @@
   const audioLeadClose=document.getElementById('audioLeadClose');
   const audioLeadSend=document.getElementById('audioLeadSend');
 
+  const isIOS=()=>{
+    const ua=navigator.userAgent||'';
+    return /iPad|iPhone|iPod/i.test(ua) ||
+      (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  };
+
   const formatTime=(seconds)=>{
     const m=String(Math.floor(seconds/60)).padStart(2,'0');
     const s=String(seconds%60).padStart(2,'0');
@@ -883,8 +912,8 @@
     if(recordStart) recordStart.hidden=state!=='idle';
     if(recordStop) recordStop.hidden=state!=='recording';
     if(audioSubmit) audioSubmit.hidden=state!=='ready';
-    if(audioReset) audioReset.hidden=!(state==='ready' || state==='sent');
-    if(audioPreview) audioPreview.hidden=!(state==='ready' || state==='sent');
+    if(audioReset) audioReset.hidden=!(state==='ready'||state==='sent');
+    if(audioPreview) audioPreview.hidden=!(state==='ready'||state==='sent');
 
     if(state==='idle'){
       if(audioStatus) audioStatus.textContent='Listo para grabar';
@@ -903,7 +932,7 @@
     }
     if(state==='sent'){
       if(audioStatus) audioStatus.textContent='Consulta enviada';
-      if(audioNote) audioNote.textContent='Listo. La consulta ya ingresó a FENOVA.';
+      if(audioNote) audioNote.textContent='Listo. Recibimos tu consulta y a la brevedad nos comunicaremos con vos.';
     }
   };
 
@@ -936,11 +965,11 @@
     }
 
     recordedBlob=null;
+    recordedMime='';
     recordedDuration=0;
     audioChunks=[];
     mediaRecorder=null;
     recordDot?.classList.remove('live');
-
     document.querySelector('.audio-success')?.remove();
     setRecorderState('idle');
   };
@@ -962,16 +991,23 @@
         }
       });
 
-      const mimeCandidates=[
-        'audio/mp4;codecs=mp4a.40.2',
-        'audio/mp4',
-        'audio/webm;codecs=opus',
-        'audio/webm',
-        'audio/ogg;codecs=opus'
-      ];
-      const mimeType=mimeCandidates.find(t=>MediaRecorder.isTypeSupported?.(t)) || '';
+      // En iPhone dejamos que WebKit elija su contenedor nativo.
+      // En otros navegadores priorizamos Opus/WebM.
+      if(isIOS()){
+        mediaRecorder=new MediaRecorder(audioStream);
+      }else{
+        const candidates=[
+          'audio/webm;codecs=opus',
+          'audio/ogg;codecs=opus',
+          'audio/webm',
+          'audio/mp4'
+        ];
+        const mime=candidates.find(t=>MediaRecorder.isTypeSupported?.(t));
+        mediaRecorder=mime
+          ? new MediaRecorder(audioStream,{mimeType:mime})
+          : new MediaRecorder(audioStream);
+      }
 
-      mediaRecorder=new MediaRecorder(audioStream,mimeType?{mimeType}:undefined);
       audioChunks=[];
 
       mediaRecorder.ondataavailable=e=>{
@@ -982,8 +1018,8 @@
         stopAudioTimer();
         cleanupStream();
         recordDot?.classList.remove('live');
-        if(audioStatus) audioStatus.textContent='Hubo un error al grabar. Probá nuevamente.';
         setRecorderState('idle');
+        if(audioStatus) audioStatus.textContent='Hubo un error al grabar. Probá nuevamente.';
       };
 
       mediaRecorder.onstop=()=>{
@@ -995,28 +1031,40 @@
           Math.min(120,Math.round((Date.now()-recordingStartedAt)/1000))
         );
 
-        const type=mediaRecorder.mimeType || audioChunks[0]?.type || 'audio/mp4';
-        recordedBlob=new Blob(audioChunks,{type});
-
-        if(!recordedBlob.size){
+        if(!audioChunks.length){
           if(audioStatus) audioStatus.textContent='No se pudo generar el audio. Probá nuevamente.';
           setRecorderState('idle');
           return;
         }
 
+        recordedMime=
+          audioChunks[0]?.type ||
+          mediaRecorder.mimeType ||
+          (isIOS()?'audio/mp4':'audio/webm');
+
+        // Si el navegador devuelve un único Blob, conservamos exactamente sus bytes.
+        recordedBlob=audioChunks.length===1
+          ? audioChunks[0]
+          : new Blob(audioChunks,{type:recordedMime});
+
+        if(!recordedBlob.size){
+          if(audioStatus) audioStatus.textContent='El audio quedó vacío. Probá nuevamente.';
+          setRecorderState('idle');
+          return;
+        }
+
         if(audioPreview?.src) URL.revokeObjectURL(audioPreview.src);
-        const url=URL.createObjectURL(recordedBlob);
-        audioPreview.src=url;
+        const previewUrl=URL.createObjectURL(recordedBlob);
+        audioPreview.src=previewUrl;
+        audioPreview.preload='metadata';
         audioPreview.load();
 
         recordDot?.classList.remove('live');
         setRecorderState('ready');
       };
 
-      // Importante en iPhone/WebKit: grabamos como un único archivo.
-      // Evita MP4 fragmentados que algunos navegadores no pueden reproducir.
+      // Grabación continua: evita segmentos MP4 incompletos en WebKit/iPhone.
       mediaRecorder.start();
-
       recordingStartedAt=Date.now();
       recordDot?.classList.add('live');
       setRecorderState('recording');
@@ -1024,9 +1072,7 @@
       timerInterval=setInterval(()=>{
         const seconds=Math.floor((Date.now()-recordingStartedAt)/1000);
         if(audioTimer) audioTimer.textContent=formatTime(seconds);
-        if(seconds>=120 && mediaRecorder?.state==='recording'){
-          mediaRecorder.stop();
-        }
+        if(seconds>=120 && mediaRecorder?.state==='recording') mediaRecorder.stop();
       },250);
 
     }catch(err){
@@ -1049,7 +1095,7 @@
   audioReset?.addEventListener('click',resetAudio);
 
   audioSubmit?.addEventListener('click',()=>{
-    if(!recordedBlob) return;
+    if(!recordedBlob)return;
     audioLeadModal?.classList.add('open');
     audioLeadModal?.setAttribute('aria-hidden','false');
     setTimeout(()=>document.getElementById('audioLeadName')?.focus(),80);
@@ -1057,11 +1103,11 @@
 
   audioLeadClose?.addEventListener('click',closeAudioLead);
   audioLeadModal?.addEventListener('click',e=>{
-    if(e.target===audioLeadModal) closeAudioLead();
+    if(e.target===audioLeadModal)closeAudioLead();
   });
 
   audioLeadSend?.addEventListener('click',async()=>{
-    if(!recordedBlob) return;
+    if(!recordedBlob)return;
 
     const name=(document.getElementById('audioLeadName')?.value||'').trim();
     const phone=(document.getElementById('audioLeadPhone')?.value||'').trim();
@@ -1078,34 +1124,64 @@
       return;
     }
 
-    const params=new URLSearchParams({
-      name,
-      phone,
-      duration:String(recordedDuration || 1)
-    });
-    if(company) params.set('company',company);
-    if(email) params.set('email',email);
-
     audioLeadSend.disabled=true;
     audioLeadSend.textContent='Enviando…';
-    if(help) help.textContent='Estamos subiendo tu audio de forma segura.';
+    if(help)help.textContent='Estamos guardando tu audio de forma segura.';
     setRecorderState('sending');
 
     try{
-      const res=await fetch('/api/consulta-audio?'+params.toString(),{
+      // 1) El backend crea una URL temporal y segura de Supabase.
+      const startRes=await fetch('/api/consulta-audio-iniciar',{
         method:'POST',
-        headers:{
-          'Content-Type':'application/octet-stream',
-          'X-Audio-Mime':recordedBlob.type || 'audio/mp4'
-        },
-        body:recordedBlob
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          mime:recordedMime||recordedBlob.type||'audio/mp4',
+          duration:recordedDuration||1
+        })
+      });
+      const start=await startRes.json().catch(()=>({}));
+      if(!startRes.ok||!start?.ok)throw new Error(start?.error||'No pudimos preparar la carga.');
+
+      // 2) El navegador sube los bytes DIRECTAMENTE a Supabase.
+      // Vercel ya no procesa ni transforma el archivo.
+      const ext=(recordedMime||recordedBlob.type||'').includes('mp4')?'m4a':
+        ((recordedMime||recordedBlob.type||'').includes('ogg')?'ogg':'webm');
+
+      const form=new FormData();
+      form.append('cacheControl','3600');
+      form.append('',recordedBlob,`consulta-fenova.${ext}`);
+
+      const uploadRes=await fetch(start.signedUrl,{
+        method:'PUT',
+        headers:{'x-upsert':'false'},
+        body:form
       });
 
-      const data=await res.json().catch(()=>({}));
-
-      if(!res.ok || !data?.ok){
-        throw new Error(data?.error || 'No pudimos enviar la consulta.');
+      if(!uploadRes.ok){
+        const detail=await uploadRes.text().catch(()=>'');
+        console.error('Supabase direct upload:',detail);
+        throw new Error('No pudimos subir el audio. Probá nuevamente.');
       }
+
+      // 3) Sólo después de que Supabase confirma el archivo, registramos la consulta.
+      const finishRes=await fetch('/api/consulta-audio-finalizar',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          id:start.id,
+          path:start.path,
+          uploadSession:start.uploadSession,
+          name,
+          phone,
+          company,
+          email,
+          mime:recordedMime||recordedBlob.type||'audio/mp4',
+          duration:recordedDuration||1
+        })
+      });
+
+      const finish=await finishRes.json().catch(()=>({}));
+      if(!finishRes.ok||!finish?.ok)throw new Error(finish?.error||'No pudimos registrar la consulta.');
 
       closeAudioLead();
       setRecorderState('sent');
@@ -1113,12 +1189,12 @@
       document.querySelector('.audio-success')?.remove();
       const success=document.createElement('div');
       success.className='audio-success';
-      success.innerHTML='<span>✓</span><div><strong>Consulta recibida por FENOVA</strong>Ya tenemos tu audio y tus datos. Te vamos a contactar por el medio que nos dejaste.</div>';
+      success.innerHTML='<span>✓</span><div><strong>Consulta recibida por FENOVA</strong>Recibimos tu audio y tus datos. A la brevedad nos comunicaremos con vos.</div>';
       audioRecorder?.appendChild(success);
 
     }catch(err){
       setRecorderState('ready');
-      if(help) help.textContent=err?.message || 'No pudimos enviar el audio. Probá nuevamente.';
+      if(help)help.textContent=err?.message||'No pudimos enviar el audio. Probá nuevamente.';
     }finally{
       audioLeadSend.disabled=false;
       audioLeadSend.textContent='Enviar consulta →';
@@ -1128,7 +1204,7 @@
   audioPreview?.addEventListener('error',()=>{
     if(audioStatus?.textContent==='Audio listo'){
       audioStatus.textContent='Audio grabado';
-      if(audioNote) audioNote.textContent='Tu navegador no pudo previsualizarlo, pero podés enviarlo igualmente.';
+      if(audioNote)audioNote.textContent='Tu navegador no pudo previsualizarlo, pero podés volver a grabarlo antes de enviarlo.';
     }
   });
 
