@@ -282,6 +282,14 @@
       .nav-count{font-size:9px!important}
     }
 
+  
+    .source-pill{display:inline-flex;padding:5px 8px;border-radius:999px;border:1px solid rgba(35,213,255,.17);background:rgba(35,213,255,.05);color:#a8edff;font-size:10px;font-weight:750}
+    .source-campaign{display:block;color:#607895;font-size:9px;margin-top:5px;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pill.presupuestada{color:#d8c5ff;background:rgba(148,101,255,.08);border-color:rgba(148,101,255,.22)}
+    .pill.ganada{color:#aff4d5;background:rgba(66,214,157,.10);border-color:rgba(66,214,157,.24)}
+    .pill.perdida{color:#ffbac0;background:rgba(255,109,121,.08);border-color:rgba(255,109,121,.20)}
+    .detail-input{width:100%;border:1px solid var(--line);background:#071527;color:white;border-radius:11px;padding:11px;outline:none}
+
   </style>
 </head>
 <body>
@@ -359,7 +367,7 @@
               <button class="filter active" data-quick="nueva">Ver nuevas</button>
             </div>
             <div class="table-wrap"><table>
-              <thead><tr><th>Cliente</th><th>Tipo</th><th>Contacto</th><th>Estado</th><th>Fecha</th></tr></thead>
+              <thead><tr><th>Cliente</th><th>Tipo</th><th>Origen</th><th>Contacto</th><th>Estado</th><th>Fecha</th></tr></thead>
               <tbody id="recentBody"></tbody>
             </table></div>
             <div class="empty" id="recentEmpty" hidden><strong>Todavía no hay consultas</strong>Cuando llegue la primera, va a aparecer acá.</div>
@@ -377,11 +385,14 @@
                 <button class="filter active" data-filter="todas">Todas</button>
                 <button class="filter" data-filter="nueva">Nuevas</button>
                 <button class="filter" data-filter="contactada">Contactadas</button>
+                <button class="filter" data-filter="presupuestada">Presupuestadas</button>
+                <button class="filter" data-filter="ganada">Ganadas</button>
+                <button class="filter" data-filter="perdida">Perdidas</button>
                 <button class="filter" data-filter="cerrada">Cerradas</button>
               </div>
             </div>
             <div class="table-wrap"><table>
-              <thead><tr><th>Cliente</th><th>Tipo</th><th>Contacto</th><th>Estado</th><th>Fecha</th></tr></thead>
+              <thead><tr><th>Cliente</th><th>Tipo</th><th>Origen</th><th>Contacto</th><th>Estado</th><th>Fecha</th></tr></thead>
               <tbody id="allBody"></tbody>
             </table></div>
             <div class="empty" id="allEmpty" hidden><strong>No encontramos resultados</strong>Probá con otro filtro o búsqueda.</div>
@@ -425,12 +436,26 @@
   const digits=v=>String(v||'').replace(/\D/g,'');
   const fmtDate=v=>new Intl.DateTimeFormat('es-AR',{dateStyle:'short',timeStyle:'short'}).format(new Date(v));
   const fmtDuration=s=>`${Math.floor((Number(s)||0)/60)}:${String((Number(s)||0)%60).padStart(2,'0')}`;
-  const stateLabel=s=>({nueva:'Nueva',contactada:'Contactada',cerrada:'Cerrada'}[s]||s);
+  const stateLabel=s=>({nueva:'Nueva',contactada:'Contactada',presupuestada:'Presupuestada',ganada:'Ganada',perdida:'Perdida',cerrada:'Cerrada'}[s]||s);
   const todayFmt=()=>new Intl.DateTimeFormat('es-AR',{weekday:'long',day:'numeric',month:'long'}).format(new Date());
+
+  const sourceLabel=x=>{
+    if(x?.utm_source)return x.utm_source;
+    try{
+      if(x?.referrer)return new URL(x.referrer).hostname.replace(/^www\./,'');
+    }catch{}
+    return 'Directo';
+  };
+  const money=v=>{
+    const n=Number(v);
+    if(!Number.isFinite(n)||n<=0)return '—';
+    return new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n);
+  };
+
 
 
   function updateDocumentTitle(){
-    const open=rows.filter(x=>x.estado!=='cerrada').length;
+    const open=rows.filter(x=>['nueva','contactada','presupuestada'].includes(x.estado)).length;
     document.title=open?`(${open}) FENOVA Admin`:'FENOVA Admin';
     const navOpen=$('#navOpenCount');
     const navAudio=$('#navAudioCount');
@@ -597,7 +622,7 @@
 
   function matchesSearch(x){
     if(!searchTerm)return true;
-    const bag=[x.nombre,x.empresa,x.telefono,x.email,x.mensaje].join(' ').toLowerCase();
+    const bag=[x.nombre,x.empresa,x.telefono,x.email,x.mensaje,x.utm_source,x.utm_campaign,x.utm_content].join(' ').toLowerCase();
     return bag.includes(searchTerm);
   }
 
@@ -617,6 +642,7 @@
       <tr data-id="${x.id}">
         <td><div class="person"><strong>${esc(x.nombre||'Sin nombre')}</strong><span>${esc(x.empresa||'Sin empresa')}</span></div></td>
         <td><span class="type">${x.tipo==='audio'?'● Audio '+fmtDuration(x.duracion_segundos):'✎ Texto'}</span></td>
+        <td><span class="source-pill">${esc(sourceLabel(x))}</span>${x.utm_campaign?`<small class="source-campaign">${esc(x.utm_campaign)}</small>`:''}</td>
         <td>${esc(x.telefono||x.email||'—')}</td>
         <td><span class="pill ${esc(x.estado)}">${stateLabel(x.estado)}</span></td>
         <td><span class="time">${fmtDate(x.created_at)}</span></td>
@@ -655,6 +681,8 @@
         <div class="detail-box"><label>Tipo</label><span>${x.tipo==='audio'?'Audio · '+fmtDuration(x.duracion_segundos):'Texto'}</span></div>
         <div class="detail-box"><label>WhatsApp</label><span>${esc(x.telefono||'—')}</span></div>
         <div class="detail-box"><label>Email</label><span>${esc(x.email||'—')}</span></div>
+        <div class="detail-box"><label>Origen</label><span>${esc(sourceLabel(x))}</span></div>
+        <div class="detail-box"><label>Campaña</label><span>${esc(x.utm_campaign||'—')}</span></div>
       </div>
 
       ${x.tipo==='audio'?`<div class="player"><button id="playAudio">▶ Cargar audio privado</button><audio id="detailAudio" controls hidden></audio></div>`:''}
@@ -664,8 +692,14 @@
       <select id="detailState">
         <option value="nueva" ${x.estado==='nueva'?'selected':''}>Nueva</option>
         <option value="contactada" ${x.estado==='contactada'?'selected':''}>Contactada</option>
+        <option value="presupuestada" ${x.estado==='presupuestada'?'selected':''}>Presupuestada</option>
+        <option value="ganada" ${x.estado==='ganada'?'selected':''}>Ganada</option>
+        <option value="perdida" ${x.estado==='perdida'?'selected':''}>Perdida</option>
         <option value="cerrada" ${x.estado==='cerrada'?'selected':''}>Cerrada</option>
       </select>
+
+      <label class="field">VALOR CERRADO / ESTIMADO (ARS)</label>
+      <input id="detailValue" class="detail-input" type="number" min="0" step="1" value="${x.valor_cerrado??''}" placeholder="Ej.: 350000">
 
       <label class="field">NOTAS INTERNAS</label>
       <textarea id="detailNotes" placeholder="Anotá seguimiento, presupuesto, próximo contacto…">${esc(x.notas||'')}</textarea>
@@ -729,7 +763,8 @@
         body:JSON.stringify({
           id:activeRow.id,
           estado:$('#detailState').value,
-          notas:$('#detailNotes').value
+          notas:$('#detailNotes').value,
+          valor_cerrado:$('#detailValue')?.value||null
         })
       });
       closeDrawer();
