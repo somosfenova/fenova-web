@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="FENOVA Soluciones integrales. Contanos tu problema y diseñamos la solución: planillas, automatización, web, e-commerce, sistemas a medida, dashboards e integraciones." />
   <meta name="theme-color" content="#07101f" />
-  <!-- FENOVA Web V10.4 · Mobile-first + audio + UX -->
+  <!-- FENOVA Web V10.5 · Backend audio + panel de consultas -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -431,6 +431,29 @@
       .carousel-arrow{top:137px}
     }
 
+  
+    /* V10.5 · Estados correctos del grabador + envío al backend */
+    [hidden]{display:none !important}
+    .audio-recorder.is-recording .audio-note{color:#8ea4c0}
+    .audio-recorder.is-ready{border-color:rgba(70,211,150,.22)}
+    .audio-recorder.is-sending{opacity:.82;pointer-events:none}
+    .audio-recorder.is-sent{
+      border-color:rgba(70,211,150,.32);
+      background:linear-gradient(180deg,rgba(16,55,48,.38),rgba(3,10,22,.5));
+    }
+    .audio-success{
+      grid-column:1/-1;
+      display:flex;align-items:flex-start;gap:10px;
+      padding:12px 14px;border-radius:12px;
+      background:rgba(43,196,133,.09);
+      border:1px solid rgba(43,196,133,.2);
+      color:#a8f1d2;font-size:12px;line-height:1.5;
+    }
+    .audio-success strong{display:block;color:#eafff6;margin-bottom:2px}
+    .admin-link-mini{
+      display:inline-flex;margin-top:9px;font-size:10px;color:#6d839f
+    }
+
   </style>
 </head>
 <body>
@@ -530,13 +553,13 @@
               <div class="audio-actions">
                 <button class="btn primary" id="recordStart" type="button">● Empezar a grabar</button>
                 <button class="btn ghost" id="recordStop" type="button" hidden>Detener</button>
-                <button class="btn primary" id="audioShare" type="button" hidden>Compartir audio →</button>
+                <button class="btn primary" id="audioSubmit" type="button" hidden>Enviar consulta →</button>
                 <button class="btn ghost" id="audioReset" type="button" hidden>Grabar de nuevo</button>
               </div>
 
               <audio id="audioPreview" controls hidden></audio>
               <p class="audio-note" id="audioNote">
-                El audio queda en tu dispositivo hasta que decidas compartirlo. En iPhone se abre el menú de compartir y podés enviarlo por WhatsApp.
+                El audio se guarda de forma privada en FENOVA cuando tocás “Enviar consulta”.
               </p>
             </div>
           </div>
@@ -571,6 +594,48 @@
 
           <button class="btn primary" id="leadSend" type="button">
             Abrir WhatsApp →
+          </button>
+        </div>
+      </div>
+
+      <div class="lead-modal" id="audioLeadModal" aria-hidden="true">
+        <div class="lead-dialog" role="dialog" aria-modal="true" aria-labelledby="audioLeadTitle">
+          <button class="lead-close" id="audioLeadClose" type="button" aria-label="Cerrar">×</button>
+          <h3 id="audioLeadTitle">¿Cómo te contactamos?</h3>
+          <p>Tu audio ya está listo. Dejanos estos datos y la consulta entra directamente al panel de FENOVA.</p>
+
+          <div class="lead-fields">
+            <div class="lead-contact-grid">
+              <label>
+                Nombre
+                <input id="audioLeadName" type="text" autocomplete="name" placeholder="Tu nombre" required>
+              </label>
+              <label>
+                WhatsApp / teléfono
+                <input id="audioLeadPhone" type="tel" autocomplete="tel" placeholder="+54 9 351..." required>
+              </label>
+            </div>
+
+            <div class="lead-contact-grid">
+              <label>
+                Empresa / negocio
+                <span style="font-weight:500;color:#657b97">(opcional)</span>
+                <input id="audioLeadCompany" type="text" autocomplete="organization" placeholder="Ej.: Mi comercio">
+              </label>
+              <label>
+                Email
+                <span style="font-weight:500;color:#657b97">(opcional)</span>
+                <input id="audioLeadEmail" type="email" autocomplete="email" placeholder="tu@email.com">
+              </label>
+            </div>
+          </div>
+
+          <div class="lead-help" id="audioLeadHelp">
+            El audio se guarda en un espacio privado de FENOVA y no queda publicado.
+          </div>
+
+          <button class="btn primary" id="audioLeadSend" type="button">
+            Enviar consulta →
           </button>
         </div>
       </div>
@@ -781,18 +846,19 @@
     });
   }));
 
-  // Grabación local. No sube nada automáticamente.
+  // Grabación de audio + envío privado al backend FENOVA
   let mediaRecorder=null;
   let audioChunks=[];
   let recordedBlob=null;
-  let recordedFile=null;
   let timerInterval=null;
   let recordingStartedAt=0;
   let audioStream=null;
+  let recordedDuration=0;
 
+  const audioRecorder=document.querySelector('.audio-recorder');
   const recordStart=document.getElementById('recordStart');
   const recordStop=document.getElementById('recordStop');
-  const audioShare=document.getElementById('audioShare');
+  const audioSubmit=document.getElementById('audioSubmit');
   const audioReset=document.getElementById('audioReset');
   const audioPreview=document.getElementById('audioPreview');
   const audioStatus=document.getElementById('audioStatus');
@@ -800,10 +866,45 @@
   const recordDot=document.getElementById('recordDot');
   const audioNote=document.getElementById('audioNote');
 
+  const audioLeadModal=document.getElementById('audioLeadModal');
+  const audioLeadClose=document.getElementById('audioLeadClose');
+  const audioLeadSend=document.getElementById('audioLeadSend');
+
   const formatTime=(seconds)=>{
     const m=String(Math.floor(seconds/60)).padStart(2,'0');
     const s=String(seconds%60).padStart(2,'0');
     return `${m}:${s}`;
+  };
+
+  const setRecorderState=(state)=>{
+    audioRecorder?.classList.remove('is-recording','is-ready','is-sending','is-sent');
+    if(state) audioRecorder?.classList.add(`is-${state}`);
+
+    if(recordStart) recordStart.hidden=state!=='idle';
+    if(recordStop) recordStop.hidden=state!=='recording';
+    if(audioSubmit) audioSubmit.hidden=state!=='ready';
+    if(audioReset) audioReset.hidden=!(state==='ready' || state==='sent');
+    if(audioPreview) audioPreview.hidden=!(state==='ready' || state==='sent');
+
+    if(state==='idle'){
+      if(audioStatus) audioStatus.textContent='Listo para grabar';
+      if(audioTimer) audioTimer.textContent='00:00';
+      if(audioNote) audioNote.textContent='El audio se guarda de forma privada en FENOVA cuando tocás “Enviar consulta”.';
+    }
+    if(state==='recording'){
+      if(audioStatus) audioStatus.textContent='Grabando';
+    }
+    if(state==='ready'){
+      if(audioStatus) audioStatus.textContent='Audio listo';
+      if(audioNote) audioNote.textContent='Escuchalo si querés y, cuando estés listo, enviá la consulta.';
+    }
+    if(state==='sending'){
+      if(audioStatus) audioStatus.textContent='Enviando audio…';
+    }
+    if(state==='sent'){
+      if(audioStatus) audioStatus.textContent='Consulta enviada';
+      if(audioNote) audioNote.textContent='Listo. La consulta ya ingresó a FENOVA.';
+    }
   };
 
   const stopAudioTimer=()=>{
@@ -816,67 +917,128 @@
     audioStream=null;
   };
 
+  const closeAudioLead=()=>{
+    audioLeadModal?.classList.remove('open');
+    audioLeadModal?.setAttribute('aria-hidden','true');
+  };
+
   const resetAudio=()=>{
-    if(mediaRecorder && mediaRecorder.state==='recording') mediaRecorder.stop();
+    try{
+      if(mediaRecorder && mediaRecorder.state==='recording') mediaRecorder.stop();
+    }catch{}
     stopAudioTimer();
     cleanupStream();
-    if(audioPreview?.src) URL.revokeObjectURL(audioPreview.src);
+
+    if(audioPreview?.src){
+      URL.revokeObjectURL(audioPreview.src);
+      audioPreview.removeAttribute('src');
+      audioPreview.load();
+    }
+
     recordedBlob=null;
-    recordedFile=null;
-    if(audioPreview){audioPreview.hidden=true;audioPreview.removeAttribute('src');audioPreview.load();}
-    if(audioShare) audioShare.hidden=true;
-    if(audioReset) audioReset.hidden=true;
-    if(recordStop) recordStop.hidden=true;
-    if(recordStart) recordStart.hidden=false;
-    if(audioTimer) audioTimer.textContent='00:00';
-    if(audioStatus) audioStatus.textContent='Listo para grabar';
+    recordedDuration=0;
+    audioChunks=[];
+    mediaRecorder=null;
     recordDot?.classList.remove('live');
+
+    document.querySelector('.audio-success')?.remove();
+    setRecorderState('idle');
   };
+
+  setRecorderState('idle');
 
   recordStart?.addEventListener('click',async()=>{
     if(!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder){
       if(audioStatus) audioStatus.textContent='Este navegador no permite grabar audio desde la web.';
       return;
     }
+
     try{
-      audioStream=await navigator.mediaDevices.getUserMedia({audio:true});
-      const mimeCandidates=['audio/mp4','audio/webm;codecs=opus','audio/webm'];
+      audioStream=await navigator.mediaDevices.getUserMedia({
+        audio:{
+          echoCancellation:true,
+          noiseSuppression:true,
+          autoGainControl:true
+        }
+      });
+
+      const mimeCandidates=[
+        'audio/mp4;codecs=mp4a.40.2',
+        'audio/mp4',
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/ogg;codecs=opus'
+      ];
       const mimeType=mimeCandidates.find(t=>MediaRecorder.isTypeSupported?.(t)) || '';
+
       mediaRecorder=new MediaRecorder(audioStream,mimeType?{mimeType}:undefined);
       audioChunks=[];
-      mediaRecorder.ondataavailable=e=>{if(e.data?.size) audioChunks.push(e.data)};
+
+      mediaRecorder.ondataavailable=e=>{
+        if(e.data && e.data.size>0) audioChunks.push(e.data);
+      };
+
+      mediaRecorder.onerror=()=>{
+        stopAudioTimer();
+        cleanupStream();
+        recordDot?.classList.remove('live');
+        if(audioStatus) audioStatus.textContent='Hubo un error al grabar. Probá nuevamente.';
+        setRecorderState('idle');
+      };
+
       mediaRecorder.onstop=()=>{
         stopAudioTimer();
         cleanupStream();
-        const type=mediaRecorder.mimeType || audioChunks[0]?.type || 'audio/webm';
+
+        recordedDuration=Math.max(
+          1,
+          Math.min(120,Math.round((Date.now()-recordingStartedAt)/1000))
+        );
+
+        const type=mediaRecorder.mimeType || audioChunks[0]?.type || 'audio/mp4';
         recordedBlob=new Blob(audioChunks,{type});
-        const ext=type.includes('mp4')?'m4a':'webm';
-        recordedFile=new File([recordedBlob],`consulta-fenova.${ext}`,{type});
+
+        if(!recordedBlob.size){
+          if(audioStatus) audioStatus.textContent='No se pudo generar el audio. Probá nuevamente.';
+          setRecorderState('idle');
+          return;
+        }
+
+        if(audioPreview?.src) URL.revokeObjectURL(audioPreview.src);
         const url=URL.createObjectURL(recordedBlob);
         audioPreview.src=url;
-        audioPreview.hidden=false;
-        audioShare.hidden=false;
-        audioReset.hidden=false;
-        recordStart.hidden=true;
-        recordStop.hidden=true;
+        audioPreview.load();
+
         recordDot?.classList.remove('live');
-        audioStatus.textContent='Audio listo';
+        setRecorderState('ready');
       };
-      mediaRecorder.start(250);
+
+      // Importante en iPhone/WebKit: grabamos como un único archivo.
+      // Evita MP4 fragmentados que algunos navegadores no pueden reproducir.
+      mediaRecorder.start();
+
       recordingStartedAt=Date.now();
       recordDot?.classList.add('live');
-      audioStatus.textContent='Grabando';
-      recordStart.hidden=true;
-      recordStop.hidden=false;
+      setRecorderState('recording');
+
       timerInterval=setInterval(()=>{
         const seconds=Math.floor((Date.now()-recordingStartedAt)/1000);
-        audioTimer.textContent=formatTime(seconds);
-        if(seconds>=120 && mediaRecorder?.state==='recording') mediaRecorder.stop();
+        if(audioTimer) audioTimer.textContent=formatTime(seconds);
+        if(seconds>=120 && mediaRecorder?.state==='recording'){
+          mediaRecorder.stop();
+        }
       },250);
+
     }catch(err){
       cleanupStream();
       recordDot?.classList.remove('live');
-      audioStatus.textContent='No pudimos acceder al micrófono. Revisá el permiso del navegador.';
+      setRecorderState('idle');
+      if(audioStatus){
+        audioStatus.textContent=
+          err?.name==='NotAllowedError'
+            ? 'Necesitamos permiso para usar el micrófono.'
+            : 'No pudimos iniciar el micrófono. Probá nuevamente.';
+      }
     }
   });
 
@@ -886,33 +1048,88 @@
 
   audioReset?.addEventListener('click',resetAudio);
 
-  audioShare?.addEventListener('click',async()=>{
-    if(!recordedFile) return;
-    const shareData={
-      files:[recordedFile],
-      title:'Consulta para FENOVA',
-      text:'Hola FENOVA, les comparto un audio con mi consulta.'
-    };
-    try{
-      if(navigator.canShare?.({files:[recordedFile]}) && navigator.share){
-        await navigator.share(shareData);
-        return;
-      }
-    }catch(err){
-      if(err?.name==='AbortError') return;
+  audioSubmit?.addEventListener('click',()=>{
+    if(!recordedBlob) return;
+    audioLeadModal?.classList.add('open');
+    audioLeadModal?.setAttribute('aria-hidden','false');
+    setTimeout(()=>document.getElementById('audioLeadName')?.focus(),80);
+  });
+
+  audioLeadClose?.addEventListener('click',closeAudioLead);
+  audioLeadModal?.addEventListener('click',e=>{
+    if(e.target===audioLeadModal) closeAudioLead();
+  });
+
+  audioLeadSend?.addEventListener('click',async()=>{
+    if(!recordedBlob) return;
+
+    const name=(document.getElementById('audioLeadName')?.value||'').trim();
+    const phone=(document.getElementById('audioLeadPhone')?.value||'').trim();
+    const company=(document.getElementById('audioLeadCompany')?.value||'').trim();
+    const email=(document.getElementById('audioLeadEmail')?.value||'').trim();
+    const help=document.getElementById('audioLeadHelp');
+
+    if(!name){
+      document.getElementById('audioLeadName')?.focus();
+      return;
+    }
+    if(!phone){
+      document.getElementById('audioLeadPhone')?.focus();
+      return;
     }
 
-    // Fallback escritorio: descarga el audio y abre WhatsApp para adjuntarlo.
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(recordedBlob);
-    a.download=recordedFile.name;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    if(audioNote) audioNote.textContent='Descargamos el audio. Se abrirá WhatsApp para que puedas adjuntarlo a la conversación.';
-    setTimeout(()=>{
-      window.open('https://wa.me/5493517737837?text='+encodeURIComponent('Hola FENOVA, grabé un audio con mi consulta. Lo adjunto en este chat.'),'_blank','noopener');
-    },350);
+    const params=new URLSearchParams({
+      name,
+      phone,
+      duration:String(recordedDuration || 1)
+    });
+    if(company) params.set('company',company);
+    if(email) params.set('email',email);
+
+    audioLeadSend.disabled=true;
+    audioLeadSend.textContent='Enviando…';
+    if(help) help.textContent='Estamos subiendo tu audio de forma segura.';
+    setRecorderState('sending');
+
+    try{
+      const res=await fetch('/api/consulta-audio?'+params.toString(),{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/octet-stream',
+          'X-Audio-Mime':recordedBlob.type || 'audio/mp4'
+        },
+        body:recordedBlob
+      });
+
+      const data=await res.json().catch(()=>({}));
+
+      if(!res.ok || !data?.ok){
+        throw new Error(data?.error || 'No pudimos enviar la consulta.');
+      }
+
+      closeAudioLead();
+      setRecorderState('sent');
+
+      document.querySelector('.audio-success')?.remove();
+      const success=document.createElement('div');
+      success.className='audio-success';
+      success.innerHTML='<span>✓</span><div><strong>Consulta recibida por FENOVA</strong>Ya tenemos tu audio y tus datos. Te vamos a contactar por el medio que nos dejaste.</div>';
+      audioRecorder?.appendChild(success);
+
+    }catch(err){
+      setRecorderState('ready');
+      if(help) help.textContent=err?.message || 'No pudimos enviar el audio. Probá nuevamente.';
+    }finally{
+      audioLeadSend.disabled=false;
+      audioLeadSend.textContent='Enviar consulta →';
+    }
+  });
+
+  audioPreview?.addEventListener('error',()=>{
+    if(audioStatus?.textContent==='Audio listo'){
+      audioStatus.textContent='Audio grabado';
+      if(audioNote) audioNote.textContent='Tu navegador no pudo previsualizarlo, pero podés enviarlo igualmente.';
+    }
   });
 
   // Ampliar los ejemplos ilustrativos
