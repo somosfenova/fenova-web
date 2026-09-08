@@ -8,10 +8,12 @@ module.exports=async function handler(req,res){
   }
   try{
     const name=cleanText(req.body?.name,120);
+    const phone=cleanText(req.body?.phone,80);
     const company=cleanText(req.body?.company,160);
     const email=cleanText(req.body?.email,180);
     const message=cleanText(req.body?.message,4000);
     if(!name)return res.status(400).json({ok:false,error:'Falta el nombre.'});
+    if(!phone)return res.status(400).json({ok:false,error:'Falta un teléfono de contacto.'});
     if(!message)return res.status(400).json({ok:false,error:'Falta la consulta.'});
 
     const row={
@@ -20,7 +22,7 @@ module.exports=async function handler(req,res){
       nombre:name,
       empresa:company||null,
       email:email||null,
-      telefono:null,
+      telefono:phone,
       mensaje:message,
       audio_path:null,
       audio_mime_type:null,
