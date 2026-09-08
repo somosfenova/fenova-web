@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#06111f">
+  <link rel="icon" type="image/png" href="/assets/fenova-isotipo.png">
   <meta name="robots" content="noindex,nofollow">
   <title>FENOVA Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -183,13 +184,74 @@
       .audio-grid{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}
       .drawer-actions{grid-template-columns:1fr}.content{padding:18px 12px 40px}
     }
+  
+    /* V10.7 · Admin más legible + branding oficial */
+    .admin-brand{gap:12px}
+    .admin-symbol{width:46px;height:46px;object-fit:contain;display:block;filter:drop-shadow(0 8px 20px rgba(17,107,255,.22))}
+    .login-symbol{width:58px;height:58px;object-fit:contain;display:block;filter:drop-shadow(0 10px 24px rgba(17,107,255,.25))}
+    .brandcopy strong{font-size:18px}
+    .brandcopy span{font-size:9px}
+    .navlabel{font-size:10px}
+    .navitem{font-size:14px;padding:13px 12px}
+    .side-status{font-size:12px}
+    .top-title{font-size:16px}
+    .top-title span{font-size:12px}
+    .search{font-size:13px;padding:11px 13px}
+    .page-head p{font-size:14px}
+    .date-chip{font-size:11px}
+    .stat-label{font-size:12px}
+    .stat-value{font-size:32px}
+    .stat-meta{font-size:11px}
+    .panel-head h2{font-size:17px}
+    .panel-head p{font-size:12px}
+    .filter{font-size:11px;padding:8px 12px}
+    th{font-size:10px;padding:13px 16px}
+    td{font-size:13px;padding:16px}
+    .person strong{font-size:13px}
+    .person span{font-size:11px}
+    .pill{font-size:10px;padding:6px 9px}
+    .audio-card h3{font-size:16px}
+    .audio-card p{font-size:12px}
+    .time,.type{font-size:12px}
+    .drawer{width:min(570px,100vw)}
+    .drawer-head strong{font-size:16px}
+    .detail-title{font-size:30px}
+    .detail-company{font-size:13px}
+    .detail-box label{font-size:10px}
+    .detail-box span{font-size:13px}
+    .player button{font-size:13px;padding:13px}
+    .drawer label.field{font-size:11px}
+    .drawer select,.drawer textarea{font-size:13px}
+    .btn{font-size:12px;padding:12px 14px}
+    .login-card{width:min(460px,100%)}
+    .login-brand strong{font-size:21px}
+    .login-brand small{font-size:8px}
+    .login-card h1{font-size:32px}
+    .login-card p{font-size:13px}
+    .login-card input{font-size:14px;padding:14px}
+    .login-card button{font-size:14px;padding:14px}
+    .login-foot{font-size:10px}
+    .player-error{
+      margin-top:10px;padding:10px 12px;border-radius:10px;
+      border:1px solid rgba(255,109,121,.18);
+      background:rgba(255,109,121,.06);color:#ffb1b9;
+      font-size:11px;line-height:1.5
+    }
+    @media(max-width:650px){
+      .page-head p{font-size:13px}
+      .stat-label{font-size:11px}
+      .stat-meta{font-size:10px}
+      td{font-size:12px}
+      .admin-symbol{width:42px;height:42px}
+    }
+
   </style>
 </head>
 <body>
   <div class="login" id="login">
     <div class="login-card">
       <div class="login-brand">
-        <div class="mark">FN</div>
+        <img class="login-symbol" src="/assets/fenova-isotipo.png" alt="">
         <div><strong>FENOVA</strong><small>SOLUCIONES INTEGRALES</small></div>
       </div>
       <h1>Bienvenido</h1>
@@ -202,8 +264,8 @@
   </div>
 
   <div class="mobile-head">
-    <div class="brand">
-      <div class="mark">FN</div>
+    <div class="brand admin-brand">
+      <img class="admin-symbol" src="/assets/fenova-isotipo.png" alt="">
       <div class="brandcopy"><strong>FENOVA</strong><span>ADMIN</span></div>
     </div>
     <button class="iconbtn" id="mobileLogout">↪</button>
@@ -494,11 +556,32 @@
     try{
       const data=await api('/api/consulta-audio-url?id='+encodeURIComponent(activeRow.id));
       const audio=$('#detailAudio');
-      audio.src=data.url;audio.hidden=false;
+      const player=audio.closest('.player');
+
+      player.querySelector('.player-error')?.remove();
+      audio.preload='metadata';
+      audio.src=data.url;
+      audio.hidden=false;
+
+      audio.onerror=()=>{
+        const msg=document.createElement('div');
+        msg.className='player-error';
+        msg.textContent='Este archivo no se puede reproducir. Si fue grabado antes de la V10.7, puede haber quedado dañado durante la carga anterior.';
+        player.appendChild(msg);
+      };
+
+      audio.onloadedmetadata=()=>{
+        if(Number.isFinite(audio.duration) && audio.duration>0){
+          btn.hidden=true;
+        }
+      };
+
       btn.hidden=true;
+      audio.load();
       audio.play().catch(()=>{});
     }catch(e){
-      btn.disabled=false;btn.textContent='No pudimos abrir el audio. Reintentar';
+      btn.disabled=false;
+      btn.textContent='No pudimos abrir el audio. Reintentar';
     }
   }
 
