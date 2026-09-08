@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Contanos tu problema. Diseñamos la solución.">
   <meta name="twitter:image" content="https://fenova.com.ar/assets/og-fenova.jpg">
 
-  <!-- FENOVA Web V10.9 · PRE-PAUTA -->
+  <!-- FENOVA Web V10.9.2 · PRE-PAUTA LOW-FRICTION LEADS -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/fenova-isotipo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -488,27 +488,25 @@
   
     /* V10.9 · PRE-PAUTA */
     .legal-sep{margin:0 6px;color:#4e6480}.privacy-link{color:#8196b2}.privacy-link:hover{color:#d9eaff}
-    .consent-banner{
-      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
-      width:min(900px,calc(100% - 28px));z-index:110;
-      display:flex;align-items:center;justify-content:space-between;gap:22px;
-      padding:16px 18px;border-radius:17px;
-      border:1px solid rgba(104,163,255,.24);
-      background:rgba(6,18,35,.96);backdrop-filter:blur(18px);
-      box-shadow:0 25px 90px rgba(0,0,0,.48)
-    }
-    .consent-banner[hidden]{display:none!important}
-    .consent-banner strong{display:block;font:700 13px Montserrat;margin-bottom:4px}
-    .consent-banner span{display:inline;color:#8296b1;font-size:11px;line-height:1.5}
-    .consent-banner a{margin-left:6px;color:#7ccfff;font-size:11px;text-decoration:underline}
-    .consent-actions{display:flex;gap:8px;flex-shrink:0}
-    .integrations{padding-top:78px;padding-bottom:78px}
+.integrations{padding-top:78px;padding-bottom:78px}
     .integrations .section-head h2{font-size:clamp(28px,3.2vw,43px)}
     @media(max-width:700px){
-      .consent-banner{display:block;bottom:12px;padding:15px}
-      .consent-actions{display:grid;grid-template-columns:1fr 1fr;margin-top:12px}
-      .consent-actions .btn{width:100%;padding:11px 8px;font-size:11px}
-      .consent-banner a{display:block;margin:5px 0 0}
+}
+
+  
+    /* V10.9.2 · aviso de privacidad sin fricción */
+    .privacy-inline{
+      margin:12px 1px 12px;
+      color:#607793;
+      font:500 10px/1.55 Inter,sans-serif;
+    }
+    .privacy-inline a{
+      color:#6bcff6;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+    @media(max-width:700px){
+      .privacy-inline{font-size:10.5px;line-height:1.5;margin-top:13px}
     }
 
   </style>
@@ -640,17 +638,28 @@
 
             <div class="lead-contact-grid">
               <label>
+                WhatsApp / teléfono
+                <input id="leadPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+54 9 351..." required>
+              </label>
+              <label>
                 Empresa / negocio
                 <span style="font-weight:500;color:#657b97">(opcional)</span>
                 <input id="leadCompany" type="text" autocomplete="organization" placeholder="Ej.: Mi comercio">
               </label>
-              <label>
-                Email
-                <span style="font-weight:500;color:#657b97">(opcional)</span>
-                <input id="leadEmail" type="email" autocomplete="email" placeholder="tu@email.com">
-              </label>
             </div>
+
+            <label>
+              Email
+              <span style="font-weight:500;color:#657b97">(opcional)</span>
+              <input id="leadEmail" type="email" autocomplete="email" placeholder="tu@email.com">
+            </label>
           </div>
+
+          <p class="privacy-inline">
+            Al enviar tu consulta, aceptás nuestra
+            <a href="/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>
+            y el uso de tus datos únicamente para responderte.
+          </p>
 
           <button class="btn primary" id="leadSend" type="button">
             Abrir WhatsApp →
@@ -693,6 +702,12 @@
           <div class="lead-help" id="audioLeadHelp">
             El audio se guarda en un espacio privado de FENOVA y no queda publicado.
           </div>
+
+          <p class="privacy-inline">
+            Al enviar tu consulta, aceptás nuestra
+            <a href="/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>
+            y el uso de tus datos únicamente para responderte.
+          </p>
 
           <button class="btn primary" id="audioLeadSend" type="button">
             Enviar consulta →
@@ -836,20 +851,6 @@
       <path d="M8.6 8.1c.7 3.3 3 5.5 6.2 6.4"/>
     </svg>
   </a>
-
-
-  <div class="consent-banner" id="consentBanner" hidden>
-    <div>
-      <strong>Tu privacidad importa.</strong>
-      <span>Usamos analítica para entender qué funciona en la web y mejorar la experiencia. Podés aceptar o continuar sólo con lo necesario.</span>
-      <a href="/privacidad.html">Ver política de privacidad</a>
-    </div>
-    <div class="consent-actions">
-      <button class="btn ghost small" id="consentNecessary" type="button">Sólo necesarios</button>
-      <button class="btn primary small" id="consentAccept" type="button">Aceptar analítica</button>
-    </div>
-  </div>
-
   <footer><div class="wrap foot"><div class="foot-brand"><div class="fenova-lockup" aria-label="FENOVA Soluciones integrales">
       <img class="fenova-symbol" src="assets/fenova-isotipo.png" alt="">
       <span><span class="fenova-word">FENOVA</span><span class="fenova-sub">SOLUCIONES INTEGRALES</span></span>
@@ -977,23 +978,11 @@
     }
   }
   window.trackFenova=trackFenova;
+  // El sitio no muestra un banner de cookies. La atribución propia (UTM/referrer)
+  // sigue funcionando; las herramientas opcionales de terceros quedan preparadas
+  // para activarse más adelante mediante una estrategia de consentimiento específica.
+  getPublicConfig().catch(()=>{});
 
-  const consentBanner=document.getElementById('consentBanner');
-  function setConsent(value){
-    try{localStorage.setItem(FENOVA_CONSENT_KEY,value)}catch{}
-    if(value==='analytics')loadTracking();
-    consentBanner?.setAttribute('hidden','');
-  }
-
-  getPublicConfig().finally(()=>{
-    let saved='';
-    try{saved=localStorage.getItem(FENOVA_CONSENT_KEY)||''}catch{}
-    if(saved==='analytics')loadTracking();
-    else if(!saved)consentBanner?.removeAttribute('hidden');
-  });
-
-  document.getElementById('consentAccept')?.addEventListener('click',()=>setConsent('analytics'));
-  document.getElementById('consentNecessary')?.addEventListener('click',()=>setConsent('necessary'));
   document.getElementById('year').textContent = new Date().getFullYear();
   const header = document.getElementById('header');
   addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20));
@@ -1025,11 +1014,13 @@
   document.getElementById('leadSend')?.addEventListener('click',async()=>{
     const problem=(document.getElementById('problemInput')?.value||'').trim();
     const name=(document.getElementById('leadName')?.value||'').trim();
+    const phone=(document.getElementById('leadPhone')?.value||'').trim();
     const company=(document.getElementById('leadCompany')?.value||'').trim();
     const email=(document.getElementById('leadEmail')?.value||'').trim();
     const btn=document.getElementById('leadSend');
 
     if(!name){document.getElementById('leadName')?.focus();return;}
+    if(!phone){document.getElementById('leadPhone')?.focus();return;}
 
     const parts=[
       'Hola FENOVA, vi su web y quiero consultarles por esto:',
@@ -1038,6 +1029,7 @@
       '',
       `Nombre: ${name}`
     ];
+    parts.push(`WhatsApp / teléfono: ${phone}`);
     if(company)parts.push(`Empresa / negocio: ${company}`);
     if(email)parts.push(`Email: ${email}`);
     parts.push('','¿Podemos verlo juntos?');
@@ -1056,7 +1048,7 @@
         headers:{'Content-Type':'application/json'},
         signal:controller.signal,
         body:JSON.stringify({
-          name,company,email,message:problem,tracking:getAttribution()
+          name,phone,company,email,message:problem,tracking:getAttribution()
         })
       });
       clearTimeout(timeout);
@@ -1349,7 +1341,6 @@
       document.getElementById('audioLeadPhone')?.focus();
       return;
     }
-
     audioLeadSend.disabled=true;
     audioLeadSend.textContent='Enviando…';
     if(help)help.textContent='Estamos guardando tu audio de forma segura.';
