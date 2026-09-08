@@ -1,15 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "^/$",
       "has": [
         {
           "type": "host",
           "value": "admin.fenova.com.ar"
         }
       ],
-      "destination": "/admin/index.html"
+      "dest": "/admin/index.html"
     }
   ],
   "headers": [
