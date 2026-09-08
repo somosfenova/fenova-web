@@ -22,6 +22,7 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({ ok: false, error: 'No pudimos leer las consultas.' });
     }
 
+    res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ ok: true, consultas: JSON.parse(text || '[]') });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err?.message || 'Error interno.' });

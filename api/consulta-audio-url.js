@@ -12,8 +12,9 @@ module.exports = async function handler(req, res) {
     if (!id) return res.status(400).json({ ok: false, error: 'Falta id.' });
 
     const { url } = env();
+
     const rowRes = await fetch(
-      `${url}/rest/v1/consultas?id=eq.${encodeURIComponent(id)}&select=audio_path&limit=1`,
+      `${url}/rest/v1/consultas?id=eq.${encodeURIComponent(id)}&select=audio_path,audio_mime_type&limit=1`,
       { headers: supabaseHeaders() }
     );
     const rows = await rowRes.json().catch(() => []);
@@ -35,16 +36,24 @@ module.exports = async function handler(req, res) {
     );
 
     const signed = await signRes.json().catch(() => ({}));
+
     if (!signRes.ok) {
       return res.status(502).json({ ok: false, error: 'No pudimos abrir el audio.' });
     }
 
     let signedUrl = signed.signedURL || signed.signedUrl || '';
     if (signedUrl && !/^https?:\/\//i.test(signedUrl)) {
-      signedUrl = url + signedUrl;
+      if (!signedUrl.startsWith('/')) signedUrl = '/' + signedUrl;
+      // createSignedUrl returns /object/sign/... relative to /storage/v1
+      signedUrl = `${url}/storage/v1${signedUrl}`;
     }
 
-    return res.status(200).json({ ok: true, url: signedUrl });
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({
+      ok: true,
+      url: signedUrl,
+      mime: rows[0].audio_mime_type || null,
+    });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err?.message || 'Error interno.' });
   }

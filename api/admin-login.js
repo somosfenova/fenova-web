@@ -1,8 +1,4 @@
-const {
-  authSecret,
-  safeEqual,
-  makeSessionCookie,
-} = require('./_lib');
+const { authSecret, safeEqual, makeSessionCookie } = require('./_lib');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {

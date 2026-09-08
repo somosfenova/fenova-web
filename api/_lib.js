@@ -33,9 +33,9 @@ function parseCookies(req) {
   raw.split(';').forEach(part => {
     const i = part.indexOf('=');
     if (i < 0) return;
-    const key = part.slice(0, i).trim();
-    const value = part.slice(i + 1).trim();
-    if (key) cookies[key] = decodeURIComponent(value);
+    const k = part.slice(0, i).trim();
+    const v = part.slice(i + 1).trim();
+    if (k) cookies[k] = decodeURIComponent(v);
   });
   return cookies;
 }
@@ -64,7 +64,7 @@ function verifySession(token) {
 }
 
 function makeSessionCookie() {
-  const exp = Date.now() + (12 * 60 * 60 * 1000); // 12 horas
+  const exp = Date.now() + (12 * 60 * 60 * 1000);
   const token = signSession(exp);
   return `fenova_admin=${encodeURIComponent(token)}; Path=/; Max-Age=43200; HttpOnly; Secure; SameSite=Lax`;
 }
@@ -77,37 +77,10 @@ function requireAdmin(req, res) {
   try {
     const cookies = parseCookies(req);
     if (verifySession(cookies.fenova_admin)) return true;
-
-    // Compatibilidad temporal con el panel V10.5.
-    const expected = process.env.ADMIN_CONSULTAS_PASSWORD || '';
-    const received = req.headers['x-admin-password'] || '';
-    if (expected && received && safeEqual(received, expected)) return true;
   } catch {}
 
   res.status(401).json({ ok: false, error: 'Sesión vencida o no autorizada.' });
   return false;
-}
-
-async function readRawBody(req, maxBytes = 4_000_000) {
-  if (Buffer.isBuffer(req.body)) {
-    if (req.body.length > maxBytes) throw new Error('El audio supera el tamaño permitido.');
-    return req.body;
-  }
-  if (typeof req.body === 'string') {
-    const b = Buffer.from(req.body);
-    if (b.length > maxBytes) throw new Error('El audio supera el tamaño permitido.');
-    return b;
-  }
-
-  const chunks = [];
-  let total = 0;
-  for await (const chunk of req) {
-    const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
-    total += buf.length;
-    if (total > maxBytes) throw new Error('El audio supera el tamaño permitido.');
-    chunks.push(buf);
-  }
-  return Buffer.concat(chunks);
 }
 
 function audioExtension(mime) {
@@ -117,6 +90,24 @@ function audioExtension(mime) {
   if (m.includes('mpeg') || m.includes('mp3')) return 'mp3';
   if (m.includes('wav')) return 'wav';
   return 'webm';
+}
+
+function makeUploadSession(id, path) {
+  const { key } = env();
+  const exp = Date.now() + (2 * 60 * 60 * 1000);
+  const body = `${exp}|${id}|${path}`;
+  const sig = crypto.createHmac('sha256', key).update(body).digest('base64url');
+  return `${exp}.${sig}`;
+}
+
+function verifyUploadSession(token, id, path) {
+  const [expRaw, sig] = String(token || '').split('.');
+  const exp = Number(expRaw);
+  if (!exp || !sig || Date.now() > exp) return false;
+  const { key } = env();
+  const body = `${exp}|${id}|${path}`;
+  const expected = crypto.createHmac('sha256', key).update(body).digest('base64url');
+  return safeEqual(sig, expected);
 }
 
 module.exports = {
@@ -129,6 +120,7 @@ module.exports = {
   makeSessionCookie,
   clearSessionCookie,
   requireAdmin,
-  readRawBody,
   audioExtension,
+  makeUploadSession,
+  verifyUploadSession,
 };
