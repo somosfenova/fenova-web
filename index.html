@@ -20,9 +20,25 @@
   <meta name="twitter:description" content="Contanos tu problema. Diseñamos la solución.">
   <meta name="twitter:image" content="https://fenova.com.ar/assets/og-fenova.jpg">
 
-  <!-- FENOVA Web V10.9.2 · PRE-PAUTA LOW-FRICTION LEADS -->
+  <!-- FENOVA Web V10.9.3 · META PIXEL ACTIVO -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/fenova-isotipo.png">
+
+  <!-- Meta Pixel Code · FENOVA Web -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1516315247184788');
+  fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
@@ -512,6 +528,11 @@
   </style>
 </head>
 <body>
+
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1516315247184788&ev=PageView&noscript=1"
+  alt=""></noscript>
+
   <div class="noise"></div>
   <header id="header"><nav class="wrap">
     <a href="#inicio" class="logo fenova-lockup" aria-label="FENOVA Soluciones integrales">
@@ -954,15 +975,7 @@
       gtag('config',c.ga4MeasurementId,{send_page_view:true});
     }
 
-    if(c.metaPixelId && !window.fbq){
-      !function(f,b,e,v,n,t,s){
-        if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-        t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
-      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init',c.metaPixelId);
-      fbq('track','PageView');
-    }
+    // Meta Pixel ya se carga en el <head> para FENOVA Web.
   }
 
   function trackFenova(event,params={}){
@@ -971,10 +984,12 @@
     if(fenovaPublicConfig.ga4MeasurementId&&!fenovaPublicConfig.gtmContainerId&&trackingLoaded){
       gtag('event',event,payload);
     }
-    if(window.fbq&&trackingLoaded){
+    if(window.fbq){
       if(event==='generate_lead')fbq('track','Lead',payload);
       else if(event==='click_whatsapp')fbq('trackCustom','ClickWhatsApp',payload);
       else if(event==='audio_start')fbq('trackCustom','AudioStart',payload);
+      else if(event==='contact_start')fbq('trackCustom','ContactStart',payload);
+      else if(event==='view_case_demo')fbq('trackCustom','ViewCaseDemo',payload);
     }
   }
   window.trackFenova=trackFenova;
