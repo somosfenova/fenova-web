@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Contanos tu problema. Diseñamos la solución.">
   <meta name="twitter:image" content="https://fenova.com.ar/assets/og-fenova.jpg">
 
-  <!-- FENOVA Web V10.9.4 · META PIXEL + GOOGLE TAG MANAGER -->
+  <!-- FENOVA Web V10.9.5 · META PIXEL + GTM + CONSENT MODE -->
   <title>FENOVA | Soluciones integrales</title>
   <link rel="icon" type="image/png" href="assets/fenova-isotipo.png">
 
@@ -36,6 +36,19 @@
       'ad_personalization': 'denied',
       'wait_for_update': 500
     });
+
+    // Si el visitante ya aceptó analítica anteriormente, respetamos su elección
+    // antes de que Google Tag Manager cargue.
+    try {
+      if (localStorage.getItem('fenova_consent_v1') === 'analytics') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted',
+          'ad_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied'
+        });
+      }
+    } catch(e) {}
   </script>
 
   <!-- Google Tag Manager -->
@@ -549,6 +562,99 @@
       .privacy-inline{font-size:10.5px;line-height:1.5;margin-top:13px}
     }
 
+
+    /* V10.9.5 · Consentimiento analítico compacto */
+    .fenova-consent{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%) translateY(14px);
+      width:min(720px,calc(100% - 34px));
+      z-index:120;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      gap:16px;
+      padding:12px 13px 12px 16px;
+      border:1px solid rgba(112,169,255,.24);
+      border-radius:16px;
+      background:rgba(7,19,39,.96);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:0 18px 55px rgba(0,0,0,.38);
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity .22s ease,transform .22s ease,visibility .22s;
+    }
+    .fenova-consent.show{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
+    }
+    .fenova-consent-copy{
+      color:#9eb0c7;
+      font:500 11.5px/1.45 Inter,sans-serif;
+    }
+    .fenova-consent-copy strong{
+      color:#eef6ff;
+      font-weight:700;
+    }
+    .fenova-consent-copy a{
+      color:#71d8ff;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+    .fenova-consent-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .fenova-consent-btn{
+      appearance:none;
+      border:1px solid rgba(135,176,232,.24);
+      border-radius:10px;
+      padding:9px 12px;
+      cursor:pointer;
+      color:#dce9f8;
+      background:rgba(255,255,255,.035);
+      font:700 11px/1 Inter,sans-serif;
+    }
+    .fenova-consent-btn:hover{background:rgba(255,255,255,.07)}
+    .fenova-consent-btn.accept{
+      border-color:transparent;
+      color:#fff;
+      background:linear-gradient(135deg,#0052ff,#1587ff);
+    }
+    .fenova-consent-prefs{
+      appearance:none;
+      border:0;
+      padding:0;
+      margin:0;
+      background:none;
+      color:#8196b2;
+      cursor:pointer;
+      font:inherit;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+    .fenova-consent-prefs:hover{color:#d9eaff}
+    @media(max-width:650px){
+      .fenova-consent{
+        width:calc(100% - 20px);
+        bottom:12px;
+        grid-template-columns:1fr;
+        gap:10px;
+        padding:12px;
+        border-radius:14px;
+      }
+      .fenova-consent-copy{font-size:11px;line-height:1.42}
+      .fenova-consent-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+      .fenova-consent-btn{width:100%;padding:10px 8px}
+    }
+
   </style>
 </head>
 <body>
@@ -902,12 +1008,26 @@
       <path d="M8.6 8.1c.7 3.3 3 5.5 6.2 6.4"/>
     </svg>
   </a>
-  <footer><div class="wrap foot"><div class="foot-brand"><div class="fenova-lockup" aria-label="FENOVA Soluciones integrales">
+  
+  <aside class="fenova-consent" id="fenovaConsent" aria-label="Preferencias de analítica" aria-live="polite">
+    <div class="fenova-consent-copy">
+      <strong>Analítica de FENOVA.</strong> Nos ayuda a entender qué funciona y mejorar la web.
+      Podés continuar sólo con lo necesario. <a href="/privacidad.html">Privacidad</a>
+    </div>
+    <div class="fenova-consent-actions">
+      <button type="button" class="fenova-consent-btn" id="consentNecessary">Sólo necesarios</button>
+      <button type="button" class="fenova-consent-btn accept" id="consentAnalytics">Aceptar analítica</button>
+    </div>
+  </aside>
+
+<footer><div class="wrap foot"><div class="foot-brand"><div class="fenova-lockup" aria-label="FENOVA Soluciones integrales">
       <img class="fenova-symbol" src="assets/fenova-isotipo.png" alt="">
       <span><span class="fenova-word">FENOVA</span><span class="fenova-sub">SOLUCIONES INTEGRALES</span></span>
     </div><p>Soluciones integrales para personas, emprendimientos, negocios y empresas. Tecnología pensada alrededor de lo que realmente necesitás.</p></div><small>© <span id="year"></span> FENOVA · Soluciones integrales.
       <span class="legal-sep">·</span>
       <a class="privacy-link" href="/privacidad.html">Privacidad</a>
+      <span class="legal-sep">·</span>
+      <button type="button" class="fenova-consent-prefs" id="openConsentPrefs">Preferencias de analítica</button>
     </small><div class="socials" aria-label="Redes sociales"><a class="social instagram" href="https://www.instagram.com/somosfenova/" target="_blank" rel="noopener" aria-label="Instagram FENOVA" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><button class="social" data-disabled="true" aria-label="YouTube próximamente" title="YouTube próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12s0-4-1-5-4-1-8-1-7 0-8 1-1 5-1 5 0 4 1 5 4 1 8 1 7 0 8-1 1-5 1-5Z"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg></button><a class="social whatsapp" href="https://wa.me/5493517737837?text=Hola%20FENOVA%2C%20vi%20su%20web%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" aria-label="WhatsApp FENOVA" title="WhatsApp FENOVA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.5c.3 2.4 2.2 4.4 4.6 5"/></svg></a><button class="social" data-disabled="true" aria-label="LinkedIn próximamente" title="LinkedIn próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="4" height="11"/><rect x="10" y="9" width="4" height="11"/><path d="M14 14c0-3 6-4 6 1v5h-4v-5c0-2-2-2-2 0"/><circle cx="6" cy="5.5" r="2"/></svg></button></div></div></footer>
 <script>
   // V10.9 · Atribución, consentimiento y tracking preparado para pauta
@@ -960,14 +1080,7 @@
   const getAttribution=()=>({...fenovaAttribution});
 
   window.dataLayer=window.dataLayer||[];
-  function gtag(){dataLayer.push(arguments)}
-  window.gtag=window.gtag||gtag;
-  gtag('consent','default',{
-    analytics_storage:'denied',
-    ad_storage:'denied',
-    ad_user_data:'denied',
-    ad_personalization:'denied'
-  });
+  window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};
 
   async function getPublicConfig(){
     try{
@@ -985,27 +1098,16 @@
   }
 
   function loadTracking(){
+    // GTM ya está instalado en el <head>. Esta función se conserva por compatibilidad
+    // y sólo concede almacenamiento analítico de Google.
     if(trackingLoaded)return;
     trackingLoaded=true;
-    const c=fenovaPublicConfig||{};
-
-    gtag('consent','update',{
+    window.gtag('consent','update',{
       analytics_storage:'granted',
-      ad_storage:c.metaPixelId?'granted':'denied',
-      ad_user_data:c.metaPixelId?'granted':'denied',
-      ad_personalization:c.metaPixelId?'granted':'denied'
+      ad_storage:'denied',
+      ad_user_data:'denied',
+      ad_personalization:'denied'
     });
-
-    if(c.gtmContainerId){
-      window.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});
-      injectScript(`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(c.gtmContainerId)}`,'fenova-gtm');
-    }else if(c.ga4MeasurementId){
-      injectScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(c.ga4MeasurementId)}`,'fenova-ga4');
-      gtag('js',new Date());
-      gtag('config',c.ga4MeasurementId,{send_page_view:true});
-    }
-
-    // Meta Pixel ya se carga en el <head> para FENOVA Web.
   }
 
   function trackFenova(event,params={}){
@@ -1023,9 +1125,50 @@
     }
   }
   window.trackFenova=trackFenova;
-  // El sitio no muestra un banner de cookies. La atribución propia (UTM/referrer)
-  // sigue funcionando; las herramientas opcionales de terceros quedan preparadas
-  // para activarse más adelante mediante una estrategia de consentimiento específica.
+
+  // Consentimiento analítico compacto. Meta Pixel mantiene su configuración actual;
+  // esta preferencia controla el almacenamiento analítico/publicitario de Google.
+  const consentBox=document.getElementById('fenovaConsent');
+  const consentNecessary=document.getElementById('consentNecessary');
+  const consentAnalytics=document.getElementById('consentAnalytics');
+  const openConsentPrefs=document.getElementById('openConsentPrefs');
+
+  function readFenovaConsent(){
+    try{return localStorage.getItem(FENOVA_CONSENT_KEY)||''}catch{return ''}
+  }
+
+  function showFenovaConsent(){
+    consentBox?.classList.add('show');
+  }
+
+  function hideFenovaConsent(){
+    consentBox?.classList.remove('show');
+  }
+
+  function setFenovaConsent(choice){
+    try{localStorage.setItem(FENOVA_CONSENT_KEY,choice)}catch{}
+    window.gtag('consent','update',{
+      analytics_storage:choice==='analytics'?'granted':'denied',
+      ad_storage:'denied',
+      ad_user_data:'denied',
+      ad_personalization:'denied'
+    });
+    window.dataLayer.push({event:'fenova_consent_update',consent_choice:choice});
+    if(choice==='analytics')trackingLoaded=true;
+    hideFenovaConsent();
+  }
+
+  consentNecessary?.addEventListener('click',()=>setFenovaConsent('necessary'));
+  consentAnalytics?.addEventListener('click',()=>setFenovaConsent('analytics'));
+  openConsentPrefs?.addEventListener('click',showFenovaConsent);
+
+  const savedConsent=readFenovaConsent();
+  if(savedConsent==='analytics'){
+    trackingLoaded=true;
+  }else if(savedConsent!=='necessary'){
+    setTimeout(showFenovaConsent,650);
+  }
+
   getPublicConfig().catch(()=>{});
 
   document.getElementById('year').textContent = new Date().getFullYear();
