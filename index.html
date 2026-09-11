@@ -655,7 +655,27 @@
       .fenova-consent-btn{width:100%;padding:10px 8px}
     }
 
-  </style>
+  
+    /* V10.9.6 · Claridad comercial y conversión */
+    .hero .lead strong{color:#dff5ff;font-weight:700}
+    .composer-reassurance{margin:14px 2px 0;display:flex;align-items:flex-start;gap:10px;color:#7890ae;font-size:12px;line-height:1.55}
+    .composer-reassurance strong{color:#b8d6f5}.reassurance-icon{flex:0 0 22px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:rgba(0,212,255,.10);border:1px solid rgba(0,212,255,.28);color:var(--cyan);font-weight:800}
+    .proposal-clarity{padding:78px 0;background:linear-gradient(180deg,#06111f 0%,#071525 100%);border-top:1px solid rgba(255,255,255,.035);border-bottom:1px solid rgba(255,255,255,.035)}
+    .proposal-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+    .proposal-copy h2{font:700 clamp(31px,3.5vw,48px)/1.06 Montserrat,sans-serif;letter-spacing:-.035em;margin:11px 0 18px;max-width:650px}
+    .proposal-copy p{color:#8fa2bb;line-height:1.72;margin:0 0 14px;max-width:650px}
+    .proposal-copy p strong{color:#d7ecff}.proposal-emphasis{color:#c7def5!important;font-weight:650}
+    .proposal-steps{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr;gap:10px;align-items:stretch}
+    .proposal-steps article{padding:22px 18px;border:1px solid rgba(126,169,228,.16);border-radius:18px;background:linear-gradient(180deg,rgba(18,38,72,.62),rgba(7,18,36,.8));min-height:190px}
+    .proposal-steps article>span{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:rgba(0,82,255,.14);border:1px solid rgba(57,151,255,.22);color:#61dfff;font:800 11px Montserrat;letter-spacing:.08em;margin-bottom:28px}
+    .proposal-steps strong{display:block;font:700 16px/1.25 Montserrat;color:#eef7ff;margin-bottom:9px}.proposal-steps p{margin:0;color:#7f93ad;font-size:12px;line-height:1.55}.proposal-arrow{display:grid;place-items:center;color:#24c8ff;font-size:22px;font-weight:900}
+    .pain-section .section-head p{max-width:560px}.pain-card{min-height:285px}.pain-card .solution-label{display:block;color:#5f7898;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:18px 0 5px}.pain-card strong{display:block;color:#d6f3ff;font-size:12.5px;line-height:1.5}
+    .trust-principle{padding:36px 0 88px;background:#071525}.trust-panel{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;padding:40px;border:1px solid rgba(80,155,255,.16);border-radius:28px;background:linear-gradient(135deg,rgba(9,29,55,.95),rgba(7,18,36,.88));box-shadow:0 24px 80px rgba(0,0,0,.18)}
+    .trust-copy h2{font:700 clamp(29px,3.2vw,44px)/1.06 Montserrat;margin:10px 0 16px;letter-spacing:-.03em}.trust-copy p{color:#8fa2bb;line-height:1.7;margin:0;max-width:620px}.trust-copy strong{color:#d7ecff}
+    .trust-points{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.trust-points>div{padding:22px 18px;border:1px solid rgba(126,169,228,.13);border-radius:18px;background:rgba(255,255,255,.025)}.trust-points span{color:#24c8ff;font:800 10px Montserrat;letter-spacing:.12em}.trust-points strong{display:block;font:700 14px/1.3 Montserrat;margin:16px 0 8px;color:#eef7ff}.trust-points p{margin:0;color:#7f93ad;font-size:11.5px;line-height:1.55}
+    @media(max-width:1030px){.proposal-grid,.trust-panel{grid-template-columns:1fr}.proposal-steps{grid-template-columns:1fr 22px 1fr 22px 1fr}.trust-points{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:740px){.proposal-clarity{padding:58px 0}.proposal-grid{gap:28px}.proposal-steps{grid-template-columns:1fr;gap:10px}.proposal-arrow{transform:rotate(90deg);height:18px}.proposal-steps article{min-height:0;padding:19px}.proposal-steps article>span{margin-bottom:18px}.trust-principle{padding:24px 0 65px}.trust-panel{padding:26px 20px;gap:28px}.trust-points{grid-template-columns:1fr}.pain-card{min-height:0}.composer-reassurance{font-size:11px}}
+</style>
 </head>
 <body>
 
@@ -697,8 +717,9 @@
             </h1>
 
             <p class="lead">
-              No necesitás saber si hace falta una web, una planilla, una automatización o un sistema.
-              Entendemos qué querés resolver y buscamos la forma más simple y efectiva de hacerlo.
+              Ayudamos a negocios, profesionales y empresas a ordenar procesos, centralizar información y reducir tareas manuales.
+              La solución puede ser una web, un e-commerce, un CRM, una automatización, un dashboard, una integración o un sistema a medida.
+              <strong>Primero entendemos el problema. Después elegimos la herramienta correcta.</strong>
             </p>
 
             <div class="solution-rotator" aria-label="Soluciones que podemos desarrollar">
@@ -778,6 +799,11 @@
               </p>
             </div>
           </div>
+        </div>
+
+        <div class="composer-reassurance reveal">
+          <span class="reassurance-icon">✓</span>
+          <span><strong>Primera orientación sin compromiso.</strong> Contanos qué necesitás resolver y te ayudamos a entender qué camino tiene más sentido. Si vale la pena avanzar, recién ahí preparamos una propuesta.</span>
         </div>
       </div>
 
@@ -873,13 +899,42 @@
       </div>
     </section>
 
-    <section class="pain-section" id="problemas"><div class="wrap"><div class="section-head reveal"><div><div class="kicker">Qué resolvemos</div><h2>¿Te pasa algo de esto?</h2></div></div><div class="pain-grid">
-      <article class="pain-card reveal"><div class="pain-icon">▦</div><h3>La planilla se te fue de las manos</h3><p>Empezó siendo práctica. Ahora tiene pestañas, fórmulas y datos que sólo una persona entiende.</p><strong>Podemos ordenarla, automatizarla o reemplazarla.</strong></article>
-      <article class="pain-card reveal"><div class="pain-icon">↻</div><h3>Hacés lo mismo todos los días</h3><p>Copiar datos, mandar mensajes, preparar reportes, actualizar estados o repetir tareas manuales.</p><strong>Probablemente haya una forma de automatizarlo.</strong></article>
-      <article class="pain-card reveal"><div class="pain-icon">⌘</div><h3>Tu información está por todos lados</h3><p>WhatsApp, Excel, mails, papeles y distintas plataformas sin una visión única.</p><strong>Podemos conectar y centralizar tu operación.</strong></article>
-      <article class="pain-card reveal"><div class="pain-icon">◫</div><h3>Tu sistema no se adapta a vos</h3><p>Terminaste cambiando tu forma de trabajar para adaptarte a una herramienta que no representa tu negocio.</p><strong>Hacemos que la herramienta se adapte a tu operación.</strong></article>
-      <article class="pain-card reveal"><div class="pain-icon">↗</div><h3>Querés vender por internet</h3><p>No sabés si necesitás una web, una tienda online, un catálogo o simplemente un flujo mejor pensado.</p><strong>Primero entendemos cómo vendés.</strong></article>
-      <article class="pain-card reveal"><div class="pain-icon">✦</div><h3>Tenés una idea y no sabés cómo hacerla</h3><p>Sabés qué querés lograr, pero no qué tecnología, plataforma o proceso hace falta para llegar.</p><strong>Nosotros encontramos la vuelta.</strong></article>
+    <section class="proposal-clarity" id="orientacion">
+      <div class="wrap">
+        <div class="proposal-grid">
+          <div class="proposal-copy reveal">
+            <div class="kicker">Cómo te ayudamos</div>
+            <h2>No necesitás saber qué tecnología necesitás.</h2>
+            <p>Podés venir con algo tan simple como <strong>“pierdo pedidos”</strong>, <strong>“hago todo manual”</strong>, <strong>“no sé cuánto stock tengo”</strong>, <strong>“quiero vender por internet”</strong> o <strong>“mi sistema no me sirve”</strong>.</p>
+            <p class="proposal-emphasis">Nosotros analizamos cómo trabajás y buscamos la forma más simple de resolverlo.</p>
+          </div>
+          <div class="proposal-steps reveal" aria-label="Cómo transformamos un problema en una solución">
+            <article>
+              <span>01</span>
+              <div><strong>Nos contás el problema</strong><p>En tus palabras. Sin tecnicismos ni formularios interminables.</p></div>
+            </article>
+            <div class="proposal-arrow">→</div>
+            <article>
+              <span>02</span>
+              <div><strong>Entendemos cómo trabajás</strong><p>Revisamos el proceso, las personas y las herramientas que ya usás.</p></div>
+            </article>
+            <div class="proposal-arrow">→</div>
+            <article>
+              <span>03</span>
+              <div><strong>Diseñamos la solución</strong><p>Puede ser simple o completa. Lo importante es que tenga sentido para vos.</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pain-section" id="problemas"><div class="wrap"><div class="section-head reveal"><div><div class="kicker">Problema → posible solución</div><h2>Partimos de lo que hoy te complica.</h2></div><p>No te pedimos que elijas una herramienta. Te mostramos algunos ejemplos de cómo un problema cotidiano puede transformarse en una solución concreta.</p></div><div class="pain-grid">
+      <article class="pain-card reveal"><div class="pain-icon">⌁</div><h3>Los pedidos llegan por WhatsApp y el stock está en Excel</h3><p>Mensajes, planillas y controles manuales que hacen difícil saber qué pasó con cada pedido.</p><span class="solution-label">Posible solución</span><strong>Sistema de pedidos + stock centralizado.</strong></article>
+      <article class="pain-card reveal"><div class="pain-icon">◎</div><h3>Tenés contactos por todos lados y nadie hace seguimiento</h3><p>Consultas que se pierden, oportunidades sin respuesta y poca visibilidad sobre cada cliente.</p><span class="solution-label">Posible solución</span><strong>CRM adaptado a tu proceso comercial.</strong></article>
+      <article class="pain-card reveal"><div class="pain-icon">↻</div><h3>Repetís las mismas tareas todos los días</h3><p>Copiar datos, enviar mensajes, actualizar estados, preparar reportes o cargar información una y otra vez.</p><span class="solution-label">Posible solución</span><strong>Automatización de tareas y procesos.</strong></article>
+      <article class="pain-card reveal"><div class="pain-icon">◫</div><h3>Tu sistema no se adapta a cómo trabaja tu negocio</h3><p>Terminás cambiando tu operación para acomodarte a una herramienta que no representa lo que necesitás.</p><span class="solution-label">Posible solución</span><strong>Integración o sistema desarrollado alrededor de tu operación.</strong></article>
+      <article class="pain-card reveal"><div class="pain-icon">↗</div><h3>Querés empezar a vender por internet</h3><p>No sabés si necesitás una landing, una tienda online, un catálogo o un flujo comercial más simple.</p><span class="solution-label">Posible solución</span><strong>Landing, web o e-commerce según tu forma de vender.</strong></article>
+      <article class="pain-card reveal"><div class="pain-icon">▥</div><h3>Tenés datos, pero no una visión clara del negocio</h3><p>La información existe, pero está repartida entre archivos y herramientas y cuesta convertirla en decisiones.</p><span class="solution-label">Posible solución</span><strong>Dashboard con la información que realmente necesitás.</strong></article>
     </div></div></section>
 
 <section class="portfolio" id="proyectos"><div class="wrap"><div class="section-head reveal"><div><div class="kicker">Casos reales</div><h2>Proyectos que ya convertimos en soluciones.</h2></div></div>
@@ -902,6 +957,23 @@
       <article class="tool-card reveal"><div class="tool-mark">01</div><h3>Excel & Google Sheets</h3><p>Planillas inteligentes, controles, cálculos, reportes y gestión.</p></article><article class="tool-card reveal"><div class="tool-mark">02</div><h3>Web & Landing Pages</h3><p>Presencia online, captación, formularios, campañas y experiencias comerciales.</p></article><article class="tool-card reveal"><div class="tool-mark">03</div><h3>E-commerce</h3><p>Catálogos, ventas, pedidos, pagos y operación online.</p></article><article class="tool-card reveal"><div class="tool-mark">04</div><h3>Automatización</h3><p>Menos tareas repetitivas, menos errores y más tiempo para lo importante.</p></article><article class="tool-card reveal"><div class="tool-mark">05</div><h3>Sistemas a medida</h3><p>Cuando una herramienta estándar ya no alcanza para tu operación.</p></article><article class="tool-card reveal"><div class="tool-mark">06</div><h3>Dashboards</h3><p>Información relevante y métricas en un solo lugar.</p></article><article class="tool-card reveal"><div class="tool-mark">07</div><h3>CRM & gestión comercial</h3><p>Clientes, oportunidades, vendedores, seguimiento y procesos comerciales.</p></article><article class="tool-card reveal"><div class="tool-mark">08</div><h3>Portales & Integraciones</h3><p>Portales para clientes o equipos y conexión entre herramientas existentes.</p></article>
     </div></div></section>
 
+
+    <section class="trust-principle">
+      <div class="wrap">
+        <div class="trust-panel reveal">
+          <div class="trust-copy">
+            <div class="kicker">Nuestra forma de trabajar</div>
+            <h2>No te vendemos tecnología porque sí.</h2>
+            <p>A veces la solución correcta es un sistema completo. Otras veces es una automatización, una web o incluso una buena planilla. <strong>Nuestro trabajo es encontrar qué tiene sentido para tu caso.</strong></p>
+          </div>
+          <div class="trust-points">
+            <div><span>01</span><strong>Diagnóstico primero</strong><p>Entendemos el problema antes de hablar de herramientas.</p></div>
+            <div><span>02</span><strong>Empezamos por lo necesario</strong><p>Sin hacerte pagar por complejidad que hoy no necesitás.</p></div>
+            <div><span>03</span><strong>Preparado para crecer</strong><p>Si mañana necesitás más, la solución puede evolucionar con tu operación.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="integrations" id="integraciones"><div class="wrap">
       <div class="section-head reveal"><div><div class="kicker">Herramientas & integraciones</div><h2>Trabajamos con las plataformas que tu operación ya usa.</h2></div></div>
@@ -991,7 +1063,7 @@
       <article class="price-card integral reveal"><span class="badge">Solución integral</span><h3>Sistemas y operaciones de mayor alcance</h3><p class="price-desc">Para múltiples usuarios, procesos, reglas de negocio e integraciones.</p><div class="price">Cotización personalizada <small>según alcance y complejidad</small></div><div class="price-note">Proyecto definido después del relevamiento</div><ul class="features"><li>Plataformas y sistemas completos</li><li>Roles y permisos</li><li>Flujos operativos o comerciales</li><li>APIs e integraciones múltiples</li><li>Soporte y evolución opcional</li></ul><a class="btn ghost small" href="#contanos">Consultar →</a></article>
     </div><div class="pricing-question reveal"><strong>¿No sabés cuál necesitás?</strong> Contanos qué querés lograr y te orientamos.</div><p class="pricing-foot reveal">Valores orientativos expresados en pesos argentinos. El presupuesto final depende del alcance, tiempos, integraciones y servicios de terceros.</p></div></section>
 
-    <section class="cta-wrap" id="contacto"><div class="wrap"><div class="cta cta-v9 reveal"><div class="kicker">FENOVA · Soluciones integrales</div><h2>¿Qué te está haciendo perder tiempo hoy?</h2><p>Puede ser una planilla, un proceso manual, una web que falta o un sistema que no funciona como necesitás. <strong>Veamos juntos qué tiene sentido hacer.</strong></p><div class="cta-actions"><a class="btn primary" href="#contanos">Hablemos</a><a class="btn ghost" href="https://wa.me/5493517737837?text=Hola%20FENOVA%2C%20vi%20su%20web%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener">Escribir por WhatsApp</a></div><div class="mini">WhatsApp FENOVA: +54 9 351 773-7837</div></div></div></section>
+    <section class="cta-wrap" id="contacto"><div class="wrap"><div class="cta cta-v9 reveal"><div class="kicker">FENOVA · Soluciones integrales</div><h2>¿Qué te está haciendo perder tiempo hoy?</h2><p>Contanos qué necesitás resolver. <strong>Te damos una primera orientación y, si tiene sentido, avanzamos con una propuesta.</strong> Sin compromiso.</p><div class="cta-actions"><a class="btn primary" href="#contanos">Hablemos</a><a class="btn ghost" href="https://wa.me/5493517737837?text=Hola%20FENOVA%2C%20vi%20su%20web%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener">Escribir por WhatsApp</a></div><div class="mini">WhatsApp FENOVA: +54 9 351 773-7837</div></div></div></section>
   </main>
 
 
@@ -1030,7 +1102,7 @@
       <button type="button" class="fenova-consent-prefs" id="openConsentPrefs">Preferencias de analítica</button>
     </small><div class="socials" aria-label="Redes sociales"><a class="social instagram" href="https://www.instagram.com/somosfenova/" target="_blank" rel="noopener" aria-label="Instagram FENOVA" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><button class="social" data-disabled="true" aria-label="YouTube próximamente" title="YouTube próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12s0-4-1-5-4-1-8-1-7 0-8 1-1 5-1 5 0 4 1 5 4 1 8 1 7 0 8-1 1-5 1-5Z"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg></button><a class="social whatsapp" href="https://wa.me/5493517737837?text=Hola%20FENOVA%2C%20vi%20su%20web%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" aria-label="WhatsApp FENOVA" title="WhatsApp FENOVA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.6Z"/><path d="M9 8.5c.3 2.4 2.2 4.4 4.6 5"/></svg></a><button class="social" data-disabled="true" aria-label="LinkedIn próximamente" title="LinkedIn próximamente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="4" height="11"/><rect x="10" y="9" width="4" height="11"/><path d="M14 14c0-3 6-4 6 1v5h-4v-5c0-2-2-2-2 0"/><circle cx="6" cy="5.5" r="2"/></svg></button></div></div></footer>
 <script>
-  // V10.9 · Atribución, consentimiento y tracking preparado para pauta
+  // V10.9.6 · Conversión, atribución, consentimiento y tracking preparado para pauta
   const FENOVA_ATTR_KEY='fenova_attribution_v1';
   const FENOVA_CONSENT_KEY='fenova_consent_v1';
   let fenovaPublicConfig={};
